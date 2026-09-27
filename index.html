@@ -1,0 +1,2845 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>B2B Technical Projects — LafargeHolcim Bangladesh</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --ink: #111317;
+    --ink-2: #181B20;
+    --ink-card: #1E2229;
+    --ink-card-hover: #262B34;
+    --stone: #E9E3D2;
+    --stone-2: #F3EFE4;
+    --brass: #B08D57;
+    --brass-light: #D9C39A;
+    --brass-dark: #8C6F42;
+    --text-light: #FFFFFF;
+    --text-muted: #9E988D;
+    --line: rgba(255, 255, 255, 0.1);
+    --line-gold: rgba(176, 141, 87, 0.35);
+
+    --cat-onboarded: #B08D57;
+    --cat-working: #3E6B63;
+    --cat-pipeline: #5B7A99;
+    --cat-previously: #8B8578;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--ink);
+    color: var(--stone-2);
+    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  h1, h2, h3, h4, .serif {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+  }
+  button, input, select, textarea { font-family: 'Poppins', sans-serif; }
+  a { color: inherit; text-decoration: none; }
+  ::selection { background: var(--brass-light); color: var(--ink); }
+
+  /* ================= NAVIGATION ================= */
+  .nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 5vw;
+    background: linear-gradient(180deg, rgba(17,19,23,0.96) 0%, rgba(17,19,23,0.7) 75%, transparent 100%);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    transition: background 0.35s, padding 0.35s, box-shadow 0.35s;
+    color: #fff;
+  }
+  .nav.scrolled {
+    background: rgba(17, 19, 23, 0.98);
+    padding: 13px 5vw;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.55);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-logo {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 19px;
+    letter-spacing: -0.02em;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    user-select: none;
+  }
+  .nav-logo span { color: var(--brass-light); font-weight: 500; font-style: italic; }
+  .nav-right { display: flex; align-items: center; gap: 20px; }
+  .nav-links { display: flex; align-items: center; gap: 20px; position: relative; }
+  
+  .nav-link {
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    color: rgba(255,255,255,0.85);
+    background: none;
+    border: none;
+    padding: 8px 6px;
+    transition: color 0.2s, transform 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .nav-link:hover, .nav-link.active {
+    color: var(--brass-light);
+  }
+
+  /* DROPDOWN FOR "PROJECT" */
+  .nav-item-dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  .nav-caret {
+    display: inline-flex;
+    align-items: center;
+    transition: transform 0.25s ease;
+  }
+  .nav-item-dropdown.open .nav-caret,
+  .nav-item-dropdown:hover .nav-caret {
+    transform: rotate(180deg);
+  }
+
+  .dropdown-menu {
+    position: absolute;
+    top: calc(100% + 14px);
+    left: 50%;
+    transform: translateX(-50%) translateY(8px);
+    min-width: 295px;
+    background: rgba(24, 27, 32, 0.98);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--line-gold);
+    border-radius: 8px;
+    padding: 10px;
+    box-shadow: 0 20px 45px rgba(0,0,0,0.65), 0 0 24px rgba(176,141,87,0.12);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1), transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.25s;
+    z-index: 1000;
+  }
+  .dropdown-menu::before {
+    content: '';
+    position: absolute;
+    top: -6px;
+    left: 50%;
+    transform: translateX(-50%) rotate(45deg);
+    width: 10px;
+    height: 10px;
+    background: rgba(24, 27, 32, 0.98);
+    border-top: 1px solid var(--line-gold);
+    border-left: 1px solid var(--line-gold);
+  }
+  .dropdown-menu.show,
+  .nav-item-dropdown:hover .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  .dropdown-header {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--brass-light);
+    font-weight: 600;
+    padding: 6px 12px 8px;
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 6px;
+  }
+  .dropdown-item {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 10px 12px;
+    border: none;
+    background: transparent;
+    color: rgba(255,255,255,0.85);
+    font-size: 13px;
+    font-weight: 500;
+    border-radius: 6px;
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.18s ease;
+    gap: 10px;
+  }
+  .dropdown-item:hover {
+    background: rgba(176, 141, 87, 0.14);
+    color: #fff;
+    transform: translateX(4px);
+  }
+  .dropdown-item.active {
+    background: rgba(176, 141, 87, 0.22);
+    color: var(--brass-light);
+    font-weight: 600;
+  }
+  .dropdown-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .dropdown-title {
+    flex-grow: 1;
+  }
+  .dropdown-badge {
+    font-size: 11px;
+    padding: 2px 7px;
+    border-radius: 12px;
+    background: rgba(255,255,255,0.08);
+    color: var(--text-muted);
+    border: 1px solid var(--line);
+  }
+  .dropdown-item:hover .dropdown-badge,
+  .dropdown-item.active .dropdown-badge {
+    background: var(--brass);
+    color: var(--ink);
+    border-color: var(--brass);
+    font-weight: 600;
+  }
+  .dropdown-divider {
+    height: 1px;
+    background: var(--line);
+    margin: 6px 4px;
+  }
+
+  /* SYNC BADGE & SEARCH */
+  .nav-sync-badge {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(176, 141, 87, 0.12);
+    border: 1px solid var(--line-gold);
+    color: var(--brass-light);
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .nav-sync-badge:hover { background: rgba(176, 141, 87, 0.22); }
+  .sync-pulse {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: #10B981;
+    box-shadow: 0 0 8px #10B981;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse { 0%, 100% { opacity: 0.7; transform: scale(0.9); } 50% { opacity: 1; transform: scale(1.2); } }
+  .nav-search-btn {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid var(--line);
+    color: #fff;
+    width: 38px; height: 38px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .nav-search-btn:hover { background: var(--brass); color: var(--ink); border-color: var(--brass); }
+
+  /* MOBILE TOGGLE & DRAWER */
+  .nav-mobile-toggle {
+    display: none;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid var(--line);
+    color: #fff;
+    width: 38px; height: 38px;
+    border-radius: 50%;
+    align-items: center; justify-content: center;
+    cursor: pointer;
+  }
+  .mobile-drawer {
+    display: none;
+    position: fixed;
+    top: 68px;
+    left: 0;
+    right: 0;
+    background: rgba(17, 19, 23, 0.98);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--line-gold);
+    padding: 20px 5vw;
+    z-index: 99;
+    flex-direction: column;
+    gap: 10px;
+    box-shadow: 0 16px 32px rgba(0,0,0,0.7);
+    max-height: calc(100vh - 70px);
+    overflow-y: auto;
+  }
+  .mobile-drawer.open {
+    display: flex;
+  }
+  .mobile-nav-btn {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 500;
+    text-align: left;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--line);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .mobile-sub-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 4px 0 10px 12px;
+    border-bottom: 1px solid var(--line);
+  }
+  .mobile-sub-btn {
+    background: none;
+    border: none;
+    color: rgba(255,255,255,0.85);
+    font-size: 13.5px;
+    text-align: left;
+    padding: 8px 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .mobile-sub-btn:hover, .mobile-sub-btn.active {
+    color: var(--brass-light);
+  }
+
+  @media (max-width: 860px) {
+    .nav-links { display: none; }
+    .nav-mobile-toggle { display: flex; }
+    .nav { padding: 14px 20px; }
+  }
+
+  /* ================= HERO (MOVING PICTURES SLIDER WITH KEN BURNS) ================= */
+  .hero {
+    position: relative;
+    height: 100vh;
+    min-height: 620px;
+    overflow: hidden;
+    background: var(--ink);
+  }
+  .hero-slide {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .hero-slide.active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .hero-slide-bg {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+  }
+  .hero-slide-bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform-origin: center center;
+    will-change: transform;
+    transform: scale(1.02);
+  }
+  .hero-slide.active:nth-child(odd) .hero-slide-bg img {
+    animation: kenBurns1 8.5s ease-out forwards;
+  }
+  .hero-slide.active:nth-child(even) .hero-slide-bg img {
+    animation: kenBurns2 8.5s ease-out forwards;
+  }
+  @keyframes kenBurns1 {
+    0% { transform: scale(1.02) translate3d(0, 0, 0); }
+    100% { transform: scale(1.12) translate3d(-1%, -0.6%, 0); }
+  }
+  @keyframes kenBurns2 {
+    0% { transform: scale(1.02) translate3d(0, 0, 0); }
+    100% { transform: scale(1.12) translate3d(1%, -0.6%, 0); }
+  }
+  .hero-slide-overlay {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 70% 30%, rgba(17,19,23,0.1) 0%, rgba(17,19,23,0.65) 65%, rgba(17,19,23,0.95) 100%),
+                linear-gradient(180deg, rgba(17,19,23,0.3) 0%, rgba(17,19,23,0.15) 45%, rgba(17,19,23,0.92) 100%);
+  }
+
+  .hero-content {
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    padding: 0 5vw 90px;
+    color: #fff;
+    max-width: 880px;
+    z-index: 10;
+  }
+  .hero-eyebrow {
+    font-size: 13px;
+    letter-spacing: 0.6px;
+    color: var(--brass-light);
+    margin-bottom: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+  .hero-title {
+    font-size: clamp(34px, 5.4vw, 62px);
+    font-weight: 700;
+    line-height: 1.08;
+    margin: 0 0 16px;
+    color: #fff;
+    letter-spacing: -0.025em;
+  }
+  .hero-title em {
+    font-style: italic;
+    color: var(--brass-light);
+    font-weight: 400;
+  }
+  .hero-sub {
+    font-size: 16px;
+    line-height: 1.65;
+    color: rgba(255,255,255,0.85);
+    max-width: 580px;
+    margin-bottom: 24px;
+  }
+  .hero-meta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13.5px;
+    color: rgba(255,255,255,0.85);
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(8px);
+    padding: 6px 14px;
+    border-radius: 20px;
+    border: 1px solid var(--line);
+    margin-bottom: 24px;
+  }
+  .hero-actions {
+    display: flex;
+    gap: 14px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .btn-primary {
+    background: var(--brass);
+    color: #111317;
+    border: none;
+    padding: 13px 26px;
+    border-radius: 4px;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+  }
+  .btn-primary:hover {
+    background: var(--brass-light);
+    transform: translateY(-2px);
+  }
+  .btn-outline {
+    background: rgba(255,255,255,0.06);
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.4);
+    padding: 12px 24px;
+    border-radius: 4px;
+    font-weight: 500;
+    font-size: 14px;
+    cursor: pointer;
+    backdrop-filter: blur(6px);
+    transition: all 0.2s;
+  }
+  .btn-outline:hover {
+    border-color: var(--brass-light);
+    color: var(--brass-light);
+    background: rgba(176, 141, 87, 0.12);
+    transform: translateY(-2px);
+  }
+
+  /* Floating Spec Card */
+  .hero-floating-card {
+    position: absolute;
+    right: 5vw;
+    bottom: 90px;
+    z-index: 10;
+    width: 320px;
+    background: rgba(24, 27, 32, 0.85);
+    border: 1px solid var(--line-gold);
+    backdrop-filter: blur(16px);
+    border-radius: 8px;
+    padding: 22px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+    animation: floatCard 6s ease-in-out infinite;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  @keyframes floatCard {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+  }
+  .hero-floating-card .tag {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    padding: 4px 10px;
+    border-radius: 20px;
+    width: fit-content;
+    color: #fff;
+  }
+  .hero-floating-card .name {
+    font-size: 18px;
+    font-weight: 600;
+    color: #fff;
+    margin: 0;
+    line-height: 1.25;
+  }
+  .hero-floating-card .status {
+    font-size: 12.5px;
+    color: var(--stone-2);
+    line-height: 1.55;
+    opacity: 0.9;
+  }
+  .hero-floating-card .btn-peek {
+    color: var(--brass-light);
+    font-size: 13px;
+    font-weight: 600;
+    background: none;
+    border: none;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+  }
+  .hero-floating-card .btn-peek:hover { color: #fff; }
+
+  @media (max-width: 980px) {
+    .hero-floating-card { display: none; }
+  }
+
+  /* Slider arrows & cues */
+  .hero-nav-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 15;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.25);
+    color: #fff;
+    width: 48px; height: 48px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    backdrop-filter: blur(6px);
+  }
+  .hero-nav-arrow:hover {
+    background: var(--brass);
+    color: var(--ink);
+    border-color: var(--brass);
+  }
+  .hero-nav-arrow.prev { left: 24px; }
+  .hero-nav-arrow.next { right: 24px; }
+  @media (max-width: 640px) { .hero-nav-arrow { display: none; } }
+
+  .hero-dots {
+    position: absolute;
+    right: 5vw;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 15;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .hero-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.3);
+    cursor: pointer;
+    transition: all 0.25s;
+  }
+  .hero-dot.active {
+    background: var(--brass-light);
+    transform: scale(1.4);
+    box-shadow: 0 0 10px var(--brass-light);
+  }
+
+  .hero-scroll-cue {
+    position: absolute;
+    left: 5vw;
+    bottom: 26px;
+    z-index: 15;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: rgba(255,255,255,0.7);
+    font-size: 12px;
+    cursor: pointer;
+  }
+  .scroll-line {
+    width: 1px; height: 32px;
+    background: rgba(255,255,255,0.3);
+    position: relative;
+    overflow: hidden;
+  }
+  .scroll-line::after {
+    content: '';
+    position: absolute;
+    top: -100%; left: 0; width: 100%; height: 100%;
+    background: var(--brass-light);
+    animation: scrolldrop 2s ease-in-out infinite;
+  }
+  @keyframes scrolldrop { 0% { top:-100%; } 60% { top:100%; } 100% { top:100%; } }
+
+  /* ================= POTENTIAL PROJECTS SLIDING CAROUSEL ================= */
+  .spotlight-section {
+    padding: 70px 5vw 40px;
+    background: var(--ink-2);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    position: relative;
+  }
+  .spotlight-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 28px;
+    flex-wrap: wrap;
+    gap: 14px;
+  }
+  .spotlight-title-group h2 {
+    font-size: clamp(24px, 3.2vw, 34px);
+    font-weight: 600;
+    margin: 0 0 6px;
+    color: #fff;
+    letter-spacing: -0.02em;
+  }
+  .spotlight-title-group p {
+    color: var(--text-muted);
+    font-size: 14px;
+    margin: 0;
+  }
+  .carousel-nav-btns {
+    display: flex;
+    gap: 10px;
+  }
+  .c-nav-btn {
+    width: 42px; height: 42px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid var(--line);
+    color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .c-nav-btn:hover { background: var(--brass); color: var(--ink); border-color: var(--brass); }
+
+  .carousel-container {
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    padding-bottom: 16px;
+    -webkit-overflow-scrolling: touch;
+  }
+  .carousel-container::-webkit-scrollbar { height: 6px; }
+  .carousel-container::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 3px; }
+  .carousel-track {
+    display: flex;
+    gap: 24px;
+    width: max-content;
+  }
+  .spotlight-card {
+    width: 340px;
+    background: var(--ink-card);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+    display: flex;
+    flex-direction: column;
+  }
+  .spotlight-card:hover {
+    transform: translateY(-6px);
+    border-color: var(--brass-light);
+    box-shadow: 0 16px 32px rgba(0,0,0,0.4);
+  }
+  .spotlight-card-img {
+    height: 190px;
+    position: relative;
+    overflow: hidden;
+    background: #000;
+  }
+  .spotlight-card-img img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+  .spotlight-card:hover .spotlight-card-img img {
+    transform: scale(1.08);
+  }
+  .spotlight-tag {
+    position: absolute;
+    top: 12px; left: 12px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    padding: 4px 10px;
+    border-radius: 20px;
+    color: #fff;
+    backdrop-filter: blur(6px);
+  }
+  .spotlight-card-body {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+  .spotlight-name {
+    font-size: 18px;
+    font-weight: 600;
+    color: #fff;
+    margin: 0 0 6px;
+    line-height: 1.3;
+  }
+  .spotlight-loc {
+    font-size: 12.5px;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 12px;
+  }
+  .spotlight-status {
+    font-size: 12.5px;
+    color: var(--stone-2);
+    opacity: 0.9;
+    line-height: 1.55;
+    margin-bottom: 16px;
+  }
+  .spotlight-card-actions {
+    margin-top: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 12px;
+    border-top: 1px solid var(--line);
+    font-size: 12.5px;
+    font-weight: 600;
+  }
+  .spotlight-btn-view {
+    color: var(--brass-light);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  /* ================= MISSION QUOTE ================= */
+  .mission {
+    padding: 80px 5vw;
+    text-align: center;
+    background: var(--ink);
+    border-bottom: 1px solid var(--line);
+  }
+  .mission p {
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(20px, 2.5vw, 28px);
+    line-height: 1.6;
+    max-width: 780px;
+    margin: 0 auto;
+    color: var(--stone-2);
+    letter-spacing: -0.01em;
+  }
+  .mission .attribution {
+    font-style: normal;
+    font-size: 13px;
+    color: var(--brass-light);
+    margin-top: 18px;
+    letter-spacing: 0.4px;
+    font-weight: 500;
+  }
+
+  /* ================= PROJECTS PORTFOLIO SECTION ================= */
+  .section-wrap {
+    padding: 60px 5vw 100px;
+  }
+  .section-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 34px;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 24px;
+  }
+  .section-title {
+    font-size: clamp(24px, 3.2vw, 36px);
+    font-weight: 600;
+    color: #fff;
+    margin: 0;
+    letter-spacing: -0.02em;
+  }
+  .section-desc {
+    color: var(--text-muted);
+    font-size: 14px;
+    max-width: 480px;
+    margin-top: 6px;
+    line-height: 1.5;
+  }
+
+  .controls-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 34px;
+  }
+  .tabs {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .tab {
+    background: var(--ink-card);
+    border: 1px solid var(--line);
+    color: var(--text-muted);
+    padding: 10px 18px;
+    border-radius: 30px;
+    font-size: 13.5px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .tab .count {
+    margin-left: 6px;
+    opacity: 0.7;
+    font-size: 12px;
+  }
+  .tab.active {
+    background: var(--brass);
+    color: var(--ink);
+    border-color: var(--brass);
+    font-weight: 600;
+  }
+  .tab:hover:not(.active) {
+    border-color: var(--brass-light);
+    color: #fff;
+  }
+
+  .search-wrap {
+    position: relative;
+  }
+  .search-input {
+    border: 1px solid var(--line);
+    background: var(--ink-card);
+    color: #fff;
+    border-radius: 30px;
+    padding: 11px 18px 11px 42px;
+    font-size: 13.5px;
+    width: 250px;
+    outline: none;
+    transition: width 0.25s, border-color 0.2s;
+  }
+  .search-input:focus {
+    width: 310px;
+    border-color: var(--brass);
+  }
+  .search-icon {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+    pointer-events: none;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+    gap: 26px;
+  }
+  .p-card {
+    background: var(--ink-card);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+    display: flex;
+    flex-direction: column;
+  }
+  .p-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 18px 36px rgba(0,0,0,0.4);
+    border-color: var(--line-gold);
+  }
+  .p-card-img {
+    position: relative;
+    height: 190px;
+    overflow: hidden;
+    background: #000;
+  }
+  .p-card-img img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+  }
+  .p-card:hover .p-card-img img {
+    transform: scale(1.06);
+  }
+  .p-card-tag {
+    position: absolute;
+    top: 14px; left: 14px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    padding: 5px 12px;
+    border-radius: 20px;
+    color: #fff;
+    backdrop-filter: blur(6px);
+  }
+  .p-card-body {
+    padding: 22px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+  .p-card-name {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0 0 6px;
+    line-height: 1.3;
+    color: #fff;
+  }
+  .p-card-loc {
+    font-size: 12.5px;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 12px;
+  }
+  .p-card-status {
+    font-size: 13px;
+    color: var(--stone-2);
+    line-height: 1.55;
+    opacity: 0.9;
+  }
+  .p-card-footer {
+    margin-top: auto;
+    padding-top: 14px;
+    border-top: 1px solid var(--line);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12.5px;
+    font-weight: 600;
+  }
+  .p-card-more {
+    color: var(--brass-light);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .empty-state {
+    text-align: center;
+    padding: 80px 20px;
+    border: 1px dashed var(--line);
+    border-radius: 6px;
+    grid-column: 1/-1;
+  }
+  .empty-state h3 { margin: 0 0 8px; color: #fff; font-size: 18px; }
+  .empty-state p { color: var(--text-muted); font-size: 14px; }
+
+  /* ================= DEDICATED PROJECT DOSSIER / DASHBOARD VIEW ================= */
+  .dashboard-view {
+    display: none;
+    padding: 100px 5vw 80px;
+    background: var(--ink);
+    min-height: 100vh;
+  }
+  .dashboard-view.active {
+    display: block;
+  }
+  .dash-nav-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 26px;
+    flex-wrap: wrap;
+    gap: 14px;
+  }
+  .btn-dash-back {
+    background: var(--ink-card);
+    border: 1px solid var(--line);
+    color: #fff;
+    padding: 10px 18px;
+    border-radius: 4px;
+    font-size: 13.5px;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s;
+  }
+  .btn-dash-back:hover {
+    border-color: var(--brass);
+    color: var(--brass-light);
+    background: rgba(176,141,87,0.12);
+  }
+  .dash-card-main {
+    background: var(--ink-card);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 24px;
+    display: grid;
+    grid-template-columns: 45% 55%;
+  }
+  .dash-img {
+    position: relative;
+    min-height: 340px;
+    background: #000;
+  }
+  .dash-img img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+  }
+  .dash-header-info {
+    padding: 36px 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .dash-tag {
+    font-size: 11.5px;
+    font-weight: 700;
+    letter-spacing: 0.4px;
+    padding: 5px 12px;
+    border-radius: 20px;
+    color: #fff;
+    width: fit-content;
+    margin-bottom: 12px;
+  }
+  .dash-title {
+    font-size: clamp(26px, 3.2vw, 38px);
+    font-weight: 700;
+    color: #fff;
+    margin: 0 0 10px;
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+  }
+  .dash-loc {
+    font-size: 14px;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 18px;
+  }
+  .dash-quick-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .dash-meta-pill {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--line);
+    color: var(--stone-2);
+    font-size: 12.5px;
+    padding: 6px 14px;
+    border-radius: 20px;
+  }
+
+  /* Information Table Card */
+  .dash-table-card {
+    background: var(--ink-card);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 32px 34px;
+    margin-bottom: 26px;
+  }
+  .dash-table-card h3 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #fff;
+    margin: 0 0 18px;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .dash-grid-details {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  .dash-row-item {
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .dash-row-item.full {
+    grid-column: 1 / -1;
+  }
+  .dash-row-item .l {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    color: var(--brass-light);
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+  .dash-row-item .v {
+    font-size: 14.5px;
+    color: #fff;
+    line-height: 1.7;
+    white-space: pre-line;
+    word-break: break-word;
+  }
+
+  /* STAKEHOLDER TREND HYPERLINK & CHIP */
+  .trend-hyperlink {
+    color: #fff;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s;
+    text-decoration: underline;
+    text-decoration-color: var(--brass);
+    text-underline-offset: 4px;
+    font-weight: 500;
+  }
+  .trend-hyperlink:hover {
+    color: var(--brass-light);
+    text-decoration-color: var(--brass-light);
+  }
+  .shared-chip {
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 12px;
+    background: rgba(176, 141, 87, 0.16);
+    border: 1px solid var(--line-gold);
+    color: var(--brass-light);
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+  .trend-hyperlink:hover .shared-chip {
+    background: var(--brass);
+    color: var(--ink);
+    border-color: var(--brass);
+  }
+
+  /* Shared Stakeholder Network Cards */
+  .dash-connections-card {
+    background: rgba(24, 27, 32, 0.95);
+    border: 1px solid var(--line-gold);
+    border-radius: 8px;
+    padding: 28px 30px;
+    margin-bottom: 26px;
+  }
+  .connections-head {
+    margin-bottom: 20px;
+  }
+  .connections-title {
+    font-size: 17px;
+    font-weight: 600;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 4px;
+  }
+  .connections-sub {
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+  .connections-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 16px;
+  }
+  .connection-item-card {
+    background: var(--ink-card);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 16px;
+    cursor: pointer;
+    transition: all 0.22s;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .connection-item-card:hover {
+    border-color: var(--brass-light);
+    background: rgba(176, 141, 87, 0.1);
+    transform: translateY(-2px);
+  }
+  .conn-type {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    color: var(--brass-light);
+    font-weight: 600;
+  }
+  .conn-name {
+    font-size: 15px;
+    font-weight: 600;
+    color: #fff;
+  }
+  .conn-summary {
+    font-size: 12.5px;
+    color: var(--text-muted);
+  }
+  .conn-action {
+    margin-top: auto;
+    font-size: 12px;
+    color: var(--brass-light);
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  /* ================= DATA ANALYSIS & TREND PAGE VIEW ================= */
+  .analysis-view {
+    display: none;
+    padding: 100px 5vw 80px;
+    background: var(--ink);
+    min-height: 100vh;
+  }
+  .analysis-view.active {
+    display: block;
+  }
+  .analysis-hero-header {
+    background: var(--ink-card);
+    border: 1px solid var(--line-gold);
+    border-radius: 8px;
+    padding: 34px 38px;
+    margin-bottom: 26px;
+  }
+  .analysis-tag {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    color: var(--brass-light);
+    margin-bottom: 8px;
+  }
+  .analysis-title {
+    font-size: clamp(24px, 3.4vw, 36px);
+    font-weight: 700;
+    color: #fff;
+    margin: 0 0 10px;
+    letter-spacing: -0.02em;
+  }
+  .analysis-sub {
+    font-size: 14.5px;
+    color: var(--stone-2);
+    opacity: 0.9;
+    max-width: 720px;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* KPI Cards for Analysis */
+  .analysis-kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+    margin-bottom: 28px;
+  }
+  .analysis-kpi-card {
+    background: var(--ink-card);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .analysis-kpi-label {
+    font-size: 11.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    color: var(--text-muted);
+    font-weight: 600;
+  }
+  .analysis-kpi-val {
+    font-size: 24px;
+    font-weight: 700;
+    color: #fff;
+  }
+  .analysis-kpi-sub {
+    font-size: 12px;
+    color: var(--brass-light);
+  }
+
+  /* Group Comparison Cards Grid */
+  .analysis-projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 24px;
+    margin-bottom: 30px;
+  }
+  .analysis-p-card {
+    background: var(--ink-card);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.25s, border-color 0.25s;
+  }
+  .analysis-p-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--brass-light);
+  }
+  .analysis-p-card-img {
+    height: 190px;
+    position: relative;
+    background: #000;
+  }
+  .analysis-p-card-img img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+  }
+  .analysis-p-card-body {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    gap: 12px;
+  }
+  .analysis-p-card-body h3 {
+    font-size: 19px;
+    font-weight: 600;
+    color: #fff;
+    margin: 0;
+  }
+  .analysis-data-block {
+    background: rgba(255,255,255,0.03);
+    border-left: 3px solid var(--brass);
+    padding: 10px 14px;
+    border-radius: 2px;
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--stone-2);
+  }
+  .analysis-data-block .block-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--brass-light);
+    font-weight: 700;
+    margin-bottom: 2px;
+  }
+
+  @media (max-width: 860px) {
+    .dash-card-main { grid-template-columns: 1fr; }
+    .dash-img { min-height: 220px; }
+    .dash-header-info { padding: 24px 20px; }
+    .dash-table-card { padding: 22px 20px; }
+    .dash-grid-details { grid-template-columns: 1fr; }
+    .analysis-hero-header { padding: 24px 20px; }
+    .analysis-projects-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ================= QUICK POP-UP MODAL ================= */
+  .modal-overlay {
+    position: fixed; inset: 0;
+    background: rgba(10, 12, 15, 0.85);
+    backdrop-filter: blur(8px);
+    display: flex; align-items: center; justify-content: center;
+    padding: 24px;
+    z-index: 200;
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.25s;
+  }
+  .modal-overlay.visible {
+    opacity: 1; pointer-events: auto;
+  }
+  .modal {
+    background: var(--ink-card);
+    border: 1px solid var(--line-gold);
+    width: 100%; max-width: 880px; max-height: 90vh;
+    overflow-y: auto;
+    border-radius: 8px;
+    display: grid;
+    grid-template-columns: 40% 60%;
+    transform: scale(0.96) translateY(10px);
+    transition: transform 0.25s;
+    box-shadow: 0 24px 48px rgba(0,0,0,0.6);
+  }
+  .modal-overlay.visible .modal {
+    transform: scale(1) translateY(0);
+  }
+  .modal-img {
+    position: relative;
+    min-height: 260px;
+    background: #000;
+  }
+  .modal-img img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+    position: absolute; inset: 0;
+  }
+  .modal-body {
+    padding: 34px 32px;
+    position: relative;
+  }
+  .modal-close {
+    position: absolute;
+    top: 16px; right: 16px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid var(--line);
+    color: #fff;
+    width: 34px; height: 34px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    z-index: 2;
+    transition: background 0.2s;
+  }
+  .modal-close:hover { background: var(--brass); color: var(--ink); }
+  .modal-tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    padding: 4px 10px;
+    border-radius: 20px;
+    color: #fff;
+    margin-bottom: 12px;
+  }
+  .modal-name {
+    font-size: 24px;
+    font-weight: 600;
+    color: #fff;
+    margin: 0 0 6px;
+    line-height: 1.25;
+  }
+  .modal-loc {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .modal-row {
+    display: flex;
+    gap: 12px;
+    font-size: 13px;
+    padding: 10px 0;
+    border-top: 1px solid var(--line);
+  }
+  .modal-row .l {
+    width: 140px;
+    flex-shrink: 0;
+    color: var(--text-muted);
+    font-weight: 500;
+  }
+  .modal-row .v { line-height: 1.6; color: #fff; }
+  .modal-block { margin-top: 16px; }
+  .modal-block .l {
+    font-size: 11.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    color: var(--brass-light);
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .modal-block p {
+    font-size: 13.5px;
+    line-height: 1.65;
+    margin: 0;
+    color: var(--stone-2);
+    white-space: pre-line;
+  }
+  @media (max-width: 720px) {
+    .modal { grid-template-columns: 1fr; }
+    .modal-img { min-height: 180px; }
+    .modal-body { padding: 24px 20px; }
+  }
+
+  /* ================= CONTACT SECTION (HOME PAGE ONLY) ================= */
+  .contact {
+    background: var(--ink-2);
+    color: #fff;
+    padding: 90px 5vw 50px;
+    position: relative;
+    border-top: 1px solid var(--line);
+  }
+  .contact-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+  .contact-head {
+    font-size: clamp(26px, 3.4vw, 42px);
+    font-weight: 600;
+    margin: 0 0 10px;
+    color: #fff;
+    letter-spacing: -0.02em;
+  }
+  .contact-sub {
+    color: var(--text-muted);
+    font-size: 14.5px;
+    margin-bottom: 44px;
+    max-width: 520px;
+    line-height: 1.6;
+  }
+  .contact-card {
+    background: var(--ink-card);
+    border: 1px solid var(--line-gold);
+    border-radius: 8px;
+    padding: 32px 34px;
+    display: flex;
+    align-items: center;
+    gap: 26px;
+    flex-wrap: wrap;
+    max-width: 680px;
+    box-shadow: 0 16px 36px rgba(0,0,0,0.3);
+  }
+  .contact-avatar {
+    width: 62px; height: 62px;
+    border-radius: 50%;
+    background: var(--brass);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px;
+    font-weight: 700;
+    color: #111317;
+    flex-shrink: 0;
+  }
+  .contact-details h4 {
+    margin: 0 0 4px;
+    font-size: 19px;
+    font-weight: 600;
+    color: #fff;
+  }
+  .contact-details .role {
+    color: var(--brass-light);
+    font-size: 13.5px;
+    margin-bottom: 3px;
+  }
+  .contact-details .dept {
+    color: var(--text-muted);
+    font-size: 12.5px;
+    margin-bottom: 12px;
+  }
+  .contact-channels {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .contact-phone-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13.5px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid var(--line);
+    padding: 8px 16px;
+    border-radius: 4px;
+    color: #fff;
+    font-weight: 500;
+    transition: all 0.2s;
+  }
+  .contact-phone-btn:hover {
+    background: var(--brass);
+    color: var(--ink);
+    border-color: var(--brass);
+  }
+  .footer-bottom {
+    margin-top: 70px;
+    padding-top: 24px;
+    border-top: 1px solid var(--line);
+    font-size: 12.5px;
+    color: var(--text-muted);
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .loading-screen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    gap: 16px;
+    background: var(--ink);
+    color: var(--text-muted);
+  }
+  .loading-mark {
+    width: 36px; height: 36px;
+    border: 2.5px solid rgba(255,255,255,0.15);
+    border-top-color: var(--brass-light);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+</style>
+</head>
+
+<body>
+<div id="app"></div>
+
+<script>
+/* ============================================================
+   ⚙️ CONFIG: Published Google Sheet CSV endpoint
+   ============================================================ */
+const SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vR9sh_j62m4ujViBuP2bnRMnE_1SR94X1wxak5m1ACDbD_TTCop-4j3zZ40LwO5eA/pub?output=csv";
+
+/* ------------------------------------------------------------
+   HEADER MAPPING & CATEGORIES
+   ------------------------------------------------------------ */
+const HEADER_MAP = {
+  'project name': 'name',
+  'location': 'location',
+  'client / implementing body': 'client',
+  'consultant': 'consultant',
+  'contractor': 'contractor',
+  'project details / scope': 'scope',
+  'project value / duration': 'value',
+  'current status': 'status',
+  'lhb activity updates': 'updates',
+  'category': 'category',
+  'photo url': 'photo',
+  'image url': 'photo',
+  'photo': 'photo'
+};
+
+const CATEGORY_LIST = ['Onboarded', 'Working On', 'Pipeline', 'Previously Worked'];
+const CATEGORY_COLOR = {
+  'Onboarded': '#B08D57',
+  'Working On': '#3E6B63',
+  'Pipeline': '#5B7A99',
+  'Previously Worked': '#8B8578'
+};
+const CATEGORY_LABEL = {
+  'Onboarded': 'Onboarded Projects',
+  'Working On': 'Working on Projects',
+  'Pipeline': 'Pipelines Projects',
+  'Previously Worked': 'Previously Worked On'
+};
+
+/* ------------------------------------------------------------
+   EXACT 100% UNABRIDGED DATA DIRECTLY FROM GOOGLE SHEETS
+   ------------------------------------------------------------ */
+const DEMO_DATA = [
+  {
+    name: 'LGED Bridge Project at NSEZ',
+    location: 'Upazila: Sonagazi',
+    client: 'BEZA / LGED',
+    consultant: 'DPM-RPMC-EKA JV',
+    contractor: 'RBCG-NDE JV',
+    scope: 'Construction of 640m 4-Lane Aesthetic Progressive Cantilever Box Girder Bridge, 1230m 4lane aesthetic Arch Bridge, 3.40km 4lane Connecting Pavement Road, 4.29km River Training Work, 3.365km Slope Protection (Package No- BEZA/W-01)',
+    value: 'BDT 662.88 Cr / 2026-2029',
+    status: 'Site mobilization completed; NDE established their own concrete batching plant at site',
+    updates: 'Coastal Guard samples sent for third party testing and analysis. After source approval, commercial negotiation will be started. Cement test request for Holcim Coastal Guard.',
+    category: 'Pipeline',
+    photo: 'https://images.unsplash.com/photo-1545558014-8692077e9b5c?auto=format&fit=crop&w=1200&q=80'
+  },
+  {
+    name: 'Jolshiri Central Complex',
+    location: 'Central Business District (Sec-15), Jolshiri Abason',
+    client: 'Jolshiri Abason',
+    consultant: 'HuaDu Architecture and Urban Design Company Ltd. (HDD), China; Local: CATS, MIST, CRITS',
+    contractor: 'SDRB-SHJR JV',
+    scope: 'B1+5 Storey, Total Floor Area: 320,000 SFT',
+    value: 'N/A',
+    status: 'Basement work is ongoing. Using CEM I bulk cement from local brand Shah using own batching plant',
+    updates: 'Combined trial has been done. Got satisfactory test results of 7 days and 28 days. 28 days test result achieved 125.4% of required strength. Commercial negotiation ongoing.',
+    category: 'Working On',
+    photo: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80'
+  },
+  {
+    name: 'Islamic Arabic University Campus',
+    location: 'Keraniganj Upazila, Dhaka District',
+    client: 'Client: Ministry of Education, Executing Agency: EED, Implementing Org: UGC & Islamic Arabic University',
+    consultant: 'DDC',
+    contractor: 'Padma Associates and Engineers Limited',
+    scope: '10 buildings (11 storeys each), Total Land Area: Approx. 35 Bighas, Built Area: Approx. 50,000 SFT',
+    value: 'Estimated Cost: BDT 179.84 Crore',
+    status: 'Site development completed; Piling works partially completed; Superstructure construction progressing',
+    updates: 'Ongoing activity updates.',
+    category: 'Pipeline',
+    photo: 'https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&w=1200&q=80'
+  },
+  {
+    name: 'TA Tower',
+    location: '468, DIT Road, Malibagh',
+    client: 'N/A',
+    consultant: 'Structural: Prof. Dr. Syed Fakhrul Ameen, PhD; Architectural: Dcon Design Studio',
+    contractor: 'N/A',
+    scope: 'B6+45 Storey, Total Floor Area: 888,500 SFT',
+    value: 'N/A',
+    status: '3rd floor work is ongoing. Using RMC from Borak using Seven Rings AM Product',
+    updates: 'Combined trial has been done with satisfactory results from BUET. Follow-up meeting done with structural consultant. Need to revisit consultant with consecutive 3 months QC documents of Powercrete.',
+    category: 'Working On',
+    photo: 'https://i.ibb.co/MDbWZpK3/TA-Tower.png'
+  },
+  {
+    name: 'NH Tower',
+    location: 'Tejgaon Industrial Area, Dhaka',
+    client: 'Next Space Ltd.',
+    consultant: 'Structural: SB Consultant; Architectural: DWm4 Intrends LTD',
+    contractor: 'N/A',
+    scope: 'B5+32 Storey, Total Floor Area: 365,935 SFT',
+    value: 'N/A',
+    status: 'Basement work is ongoing. Using RMC from Dhamrai Plant; Using OPC from Fresh',
+    updates: 'PM visit & Consultant visit done. Internal negotiation with RMC & Supply Planning ongoing. Meetings done with Nextspace\'s MD & QC team. Conducted 2 Trial Mixes using Powercrete Cement to achieve 7,500 psi (7- & 14-days test results satisfactory).',
+    category: 'Working On',
+    photo: 'https://i.ibb.co/CKw1z3st/NH-Tower.png'
+  },
+  {
+    name: 'Emnipur Tower',
+    location: 'Tejgaon Industrial Area, Dhaka',
+    client: 'Next Space Ltd.',
+    consultant: 'Structural: SB Consultant; Architectural: Volumezero',
+    contractor: 'N/A',
+    scope: 'B7+32 Storey, Total Floor Area: 452,186 SFT',
+    value: 'N/A',
+    status: 'Basement work is ongoing. Using RMC from Dhamrai Plant; Using OPC from Fresh',
+    updates: 'PM visit & Consultant visit done. Internal negotiation with RMC & Supply Planning ongoing. Meetings done with Nextspace\'s MD & QC team. Conducted 2 Trial Mixes using Powercrete Cement to achieve 7,500 psi in 28 days (7- & 14-days test results satisfactory).',
+    category: 'Working On',
+    photo: 'https://drive.google.com/uc?export=view&id=1QS8Dprpc62kgcGjxqTjRrEkJQ0so8mqu'
+  },
+  {
+    name: 'Sky Reach Tower',
+    location: 'Tejgaon Industrial Area, Dhaka',
+    client: 'Sena Kalyan Constructions and Developments Ltd and Shanta Holdings Ltd.',
+    consultant: 'Structural: SB Consultant; Architectural: Dcon Design Studio',
+    contractor: 'N/A',
+    scope: '41 Storey',
+    value: 'N/A',
+    status: 'Piling work started. Using Shah RMC',
+    updates: 'PM visit & Consultant visit done. Shore Piling & Design review ongoing. Technical Presentation at SKCD done. RAJUK Plan under review (Revised).',
+    category: 'Pipeline',
+    photo: 'https://images.unsplash.com/photo-1577495508048-b635879837f1?auto=format&fit=crop&w=1200&q=80'
+  },
+  {
+    name: 'Green Mohakhali',
+    location: 'House-19, Mohakhali C/A, Dhaka',
+    client: 'Amin Mohammad Foundation',
+    consultant: 'Structural: Khandaker Khairul Alam',
+    contractor: 'N/A',
+    scope: 'B4+20 Storey, Total Floor Area: 91,500 SFT',
+    value: 'N/A',
+    status: 'Shore piling work done; Basement work ongoing. Using Borak RMC; Using Incee cement',
+    updates: 'Visits done with Project In-Charge, DM of Supply Chain, and AGM of Construction. Approaching for technical presentation with engineering team.',
+    category: 'Pipeline',
+    photo: 'https://images.unsplash.com/photo-1554469384-e58fac16e23a?auto=format&fit=crop&w=1200&q=80'
+  }
+];
+
+let projects = [...DEMO_DATA];
+let loaded = false;
+let heroIndex = 0;
+let heroTimer = null;
+let currentView = 'main'; // 'main', 'dashboard', or 'analysis'
+let selectedProjectIndex = 0;
+let analysisState = { type: 'Consultant', query: 'SB Consultant', returnProjectIndex: 0 };
+let view = { tab: 'All', search: '' };
+let mobileMenuOpen = false;
+
+/* ------------------------------------------------------------
+   ICONS & UTILITIES
+   ------------------------------------------------------------ */
+function icon(name){
+  const i = {
+    pin: '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s7-7.58 7-12A7 7 0 0 0 5 9c0 4.42 7 12 7 12z"/><circle cx="12" cy="9" r="2.5"/></svg>',
+    search: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>',
+    arrowL: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>',
+    arrowR: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>',
+    close: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg>',
+    phone: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>',
+    chev: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="m9 18 6-6-6-6"/></svg>',
+    chevDown: '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg>',
+    back: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>',
+    menu: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>',
+    link: '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>'
+  };
+  return i[name] || '';
+}
+
+function escapeHtml(str){
+  return (str === undefined || str === null ? '' : str).toString().replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+}
+
+function formatProjectText(text){
+  if(!text || text === 'N/A' || text === '—') return '—';
+  return escapeHtml(text).replace(/\r?\n/g, '<br/>');
+}
+
+function resolvePhotoUrl(p) {
+  const url = (p.photo || '').trim();
+  const name = (p.name || '').toLowerCase();
+  
+  if (name.includes('ta tower')) return 'TA Tower.png';
+  if (name.includes('nh tower')) return 'NH Tower.png';
+  if (name.includes('emnipur')) return 'Emnipur Tower.png';
+
+  if (url) {
+    const driveMatch = url.match(/\/file\/d\/([a-zA-Z0-9_-]+)/) ||
+                       url.match(/[?&]id=([a-zA-Z0-9_-]+)/) ||
+                       url.match(/\/d\/([a-zA-Z0-9_-]+)/);
+    if (driveMatch && driveMatch[1]) {
+      return `https://lh3.googleusercontent.com/d/${driveMatch[1]}`;
+    }
+    return url;
+  }
+  return 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80';
+}
+
+function mediaFor(p){
+  const src = resolvePhotoUrl(p);
+  return `<img src="${escapeHtml(src)}" alt="${escapeHtml(p.name)}" onerror="this.src='https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80'"/>`;
+}
+
+function getCategoryCounts(){
+  const counts = { All: projects.length };
+  CATEGORY_LIST.forEach(c => counts[c] = 0);
+  projects.forEach(p => { if(counts[p.category] !== undefined) counts[p.category]++; });
+  return counts;
+}
+
+/* ------------------------------------------------------------
+   CROSS-PROJECT DATA TREND ANALYSIS & STAKEHOLDER MAPPING
+   ------------------------------------------------------------ */
+function findRelatedProjects(type, query){
+  if(!query || query === 'N/A' || query === '—') return [];
+  const q = query.toLowerCase().trim();
+  return projects.filter(p => {
+    if(type === 'Consultant') return (p.consultant || '').toLowerCase().includes(q);
+    if(type === 'Client') return (p.client || '').toLowerCase().includes(q);
+    if(type === 'Contractor') return (p.contractor || '').toLowerCase().includes(q);
+    if(type === 'Location') return (p.location || '').toLowerCase().includes(q);
+    return false;
+  });
+}
+
+function renderLinkedStakeholder(fieldValue, type){
+  if(!fieldValue || fieldValue === 'N/A' || fieldValue === '—') return '—';
+  
+  // List of high-value shared entities to hyperlink across projects
+  const knownEntities = [
+    { name: 'SB Consultant', type: 'Consultant', query: 'SB Consultant' },
+    { name: 'Dcon Design Studio', type: 'Consultant', query: 'Dcon Design Studio' },
+    { name: 'Prof. Dr. Syed Fakhrul Ameen', type: 'Consultant', query: 'Syed Fakhrul Ameen' },
+    { name: 'DWm4 Intrends', type: 'Consultant', query: 'DWm4 Intrends' },
+    { name: 'Volumezero', type: 'Consultant', query: 'Volumezero' },
+    { name: 'DDC', type: 'Consultant', query: 'DDC' },
+    { name: 'Khandaker Khairul Alam', type: 'Consultant', query: 'Khandaker Khairul Alam' },
+    { name: 'HuaDu Architecture', type: 'Consultant', query: 'HuaDu' },
+    { name: 'Next Space Ltd.', type: 'Client', query: 'Next Space' },
+    { name: 'Shanta Holdings', type: 'Client', query: 'Shanta Holdings' },
+    { name: 'Sena Kalyan Constructions', type: 'Client', query: 'Sena Kalyan' },
+    { name: 'Amin Mohammad Foundation', type: 'Client', query: 'Amin Mohammad' },
+    { name: 'BEZA / LGED', type: 'Client', query: 'BEZA' },
+    { name: 'Jolshiri Abason', type: 'Client', query: 'Jolshiri Abason' },
+    { name: 'Ministry of Education', type: 'Client', query: 'Ministry of Education' },
+    { name: 'RBCG-NDE JV', type: 'Contractor', query: 'NDE' },
+    { name: 'Padma Associates', type: 'Contractor', query: 'Padma Associates' },
+    { name: 'SDRB-SHJR JV', type: 'Contractor', query: 'SDRB' }
+  ];
+
+  let formatted = escapeHtml(fieldValue);
+  
+  knownEntities.forEach(ent => {
+    if(ent.type === type && formatted.toLowerCase().includes(ent.name.toLowerCase())){
+      const matches = findRelatedProjects(type, ent.query);
+      const isShared = matches.length > 1;
+      const countBadge = isShared 
+        ? `<span class="shared-chip">${icon('link')} ${matches.length} Shared Sites</span>`
+        : `<span class="shared-chip">${matches.length} Site</span>`;
+      
+      const regex = new RegExp(`(${ent.name.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&')})`, 'gi');
+      formatted = formatted.replace(regex, `<span class="trend-hyperlink" onclick="openAnalysisGroup('${ent.type}', '${escapeHtml(ent.query)}')">$1 ${countBadge}</span>`);
+    }
+  });
+
+  return formatted;
+}
+
+function openAnalysisGroup(type, query){
+  analysisState = {
+    type: type,
+    query: query,
+    returnProjectIndex: selectedProjectIndex
+  };
+  currentView = 'analysis';
+  render();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function returnFromAnalysis(){
+  currentView = 'dashboard';
+  selectedProjectIndex = analysisState.returnProjectIndex || 0;
+  render();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+/* ------------------------------------------------------------
+   CSV PARSER & DATA LOADER (SYNCS LIVE GOOGLE SHEET)
+   ------------------------------------------------------------ */
+function parseCSV(text){
+  const rows = []; let row = []; let field = ''; let inQuotes = false;
+  for(let i=0; i<text.length; i++){
+    const c = text[i];
+    if(inQuotes){
+      if(c === '"'){
+        if(text[i+1] === '"'){ field += '"'; i++; }
+        else inQuotes = false;
+      } else field += c;
+    } else {
+      if(c === '"') inQuotes = true;
+      else if(c === ','){ row.push(field); field = ''; }
+      else if(c === '\r'){ }
+      else if(c === '\n'){ row.push(field); rows.push(row); row = []; field = ''; }
+      else field += c;
+    }
+  }
+  if(field.length || row.length){ row.push(field); rows.push(row); }
+  return rows.filter(r => r.some(f => f.trim() !== ''));
+}
+
+function normalizeHeader(h){
+  return h.toString().trim().toLowerCase().replace(/\s+/g, ' ');
+}
+
+function rowsToProjects(rows){
+  if(!rows.length) return [];
+  const keys = rows[0].map(normalizeHeader).map(h => HEADER_MAP[h] || null);
+  return rows.slice(1).map(r => {
+    const o = {};
+    keys.forEach((k, i) => { if(k) o[k] = (r[i] || '').trim(); });
+    
+    // Normalize category
+    const rawCat = o.category || '';
+    if(rawCat.match(/onboard/i)) o.category = 'Onboarded';
+    else if(rawCat.match(/work|ongoing/i)) o.category = 'Working On';
+    else if(rawCat.match(/pipe|upcoming/i)) o.category = 'Pipeline';
+    else if(rawCat.match(/prev/i)) o.category = 'Previously Worked';
+    else o.category = 'Pipeline';
+
+    return o;
+  }).filter(p => p.name);
+}
+
+async function loadData(){
+  try{
+    const res = await fetch(SHEET_CSV_URL + '&_cb=' + Date.now(), { cache: 'no-store' });
+    if(!res.ok) throw new Error('Network error');
+    const text = await res.text();
+    const parsed = rowsToProjects(parseCSV(text));
+    if(parsed.length > 0){
+      projects = parsed;
+    }
+  }catch(e){
+    // Keep full DEMO_DATA fallback if offline or restricted
+    projects = DEMO_DATA;
+  }
+  loaded = true;
+  render();
+}
+
+/* ------------------------------------------------------------
+   MAIN RENDER DISPATCHER
+   ------------------------------------------------------------ */
+function render(){
+  const app = document.getElementById('app');
+  if(!loaded){
+    app.innerHTML = `<div class="loading-screen"><div class="loading-mark"></div><p>Loading projects…</p></div>`;
+    return;
+  }
+  
+  if(currentView === 'dashboard'){
+    // REQUIREMENT 1: NO renderContact() on project dossier page!
+    app.innerHTML = renderNav() + renderDashboardPage() + renderModalShell();
+  } else if(currentView === 'analysis'){
+    // REQUIREMENT 1 & 3: Data Trend Analysis page, NO renderContact()!
+    app.innerHTML = renderNav() + renderAnalysisPage() + renderModalShell();
+  } else {
+    // Front page / Home: renderContact() IS included at the end!
+    app.innerHTML = renderNav() + renderHero() + renderPotentialSpotlight() + renderMission() + renderSection() + renderContact() + renderModalShell();
+  }
+  attachAfterRender();
+}
+
+/* ------------------------------------------------------------
+   NAVBAR: HOME + PROJECT (WITH 4 CLEAN CATEGORIES)
+   ------------------------------------------------------------ */
+function renderNav(){
+  const counts = getCategoryCounts();
+  const isHomeActive = currentView === 'main' && view.tab === 'All';
+  const isProjActive = currentView === 'dashboard' || currentView === 'analysis' || (currentView === 'main' && view.tab !== 'All');
+
+  return `<header class="nav" id="nav">
+    <div class="nav-logo" onclick="goToHome()">
+      B2B <span>Technical Projects</span>
+    </div>
+    <div class="nav-right">
+      <nav class="nav-links">
+        <!-- 1. HOME NAV BAR (Shows Current Front Page) -->
+        <button class="nav-link ${isHomeActive ? 'active' : ''}" id="navLinkHome" onclick="goToHome()">
+          Home
+        </button>
+
+        <!-- 2. PROJECT NAV BAR (Shows 4 Categories on click) -->
+        <div class="nav-item-dropdown" id="projectNavDropdown">
+          <button class="nav-link ${isProjActive ? 'active' : ''}" id="projectDropdownBtn" onclick="toggleProjectDropdown(event)" aria-haspopup="true" aria-expanded="false">
+            <span>Project</span>
+            <span class="nav-caret">${icon('chevDown')}</span>
+          </button>
+          
+          <div class="dropdown-menu" id="projectDropdownMenu">
+            <div class="dropdown-header">Project Categories</div>
+            
+            <button class="dropdown-item ${view.tab === 'Onboarded' ? 'active' : ''}" onclick="selectCategoryFromNav('Onboarded')">
+              <span class="dropdown-dot" style="background:var(--cat-onboarded); box-shadow:0 0 6px var(--cat-onboarded)"></span>
+              <span class="dropdown-title">Onboarded Projects</span>
+              <span class="dropdown-badge">${counts['Onboarded'] || 0}</span>
+            </button>
+            
+            <button class="dropdown-item ${view.tab === 'Working On' ? 'active' : ''}" onclick="selectCategoryFromNav('Working On')">
+              <span class="dropdown-dot" style="background:var(--cat-working); box-shadow:0 0 6px var(--cat-working)"></span>
+              <span class="dropdown-title">Working on Projects</span>
+              <span class="dropdown-badge">${counts['Working On'] || 0}</span>
+            </button>
+            
+            <button class="dropdown-item ${view.tab === 'Pipeline' ? 'active' : ''}" onclick="selectCategoryFromNav('Pipeline')">
+              <span class="dropdown-dot" style="background:var(--cat-pipeline); box-shadow:0 0 6px var(--cat-pipeline)"></span>
+              <span class="dropdown-title">Pipelines Projects</span>
+              <span class="dropdown-badge">${counts['Pipeline'] || 0}</span>
+            </button>
+            
+            <button class="dropdown-item ${view.tab === 'Previously Worked' ? 'active' : ''}" onclick="selectCategoryFromNav('Previously Worked')">
+              <span class="dropdown-dot" style="background:var(--cat-previously); box-shadow:0 0 6px var(--cat-previously)"></span>
+              <span class="dropdown-title">Previously Worked On</span>
+              <span class="dropdown-badge">${counts['Previously Worked'] || 0}</span>
+            </button>
+
+            <div class="dropdown-divider"></div>
+
+            <button class="dropdown-item ${view.tab === 'All' && !isHomeActive ? 'active' : ''}" onclick="selectCategoryFromNav('All')">
+              <span class="dropdown-dot" style="background:var(--brass-light); box-shadow:0 0 6px var(--brass-light)"></span>
+              <span class="dropdown-title">View All Projects</span>
+              <span class="dropdown-badge">${counts['All'] || 0}</span>
+            </button>
+          </div>
+        </div>
+      </nav>
+
+      <div class="nav-sync-badge" onclick="loadData()" title="Click to refresh live data from Google Sheets">
+        <div class="sync-pulse"></div>
+        <span>Live Synced (${projects.length})</span>
+      </div>
+      
+      <button class="nav-search-btn" title="Search Projects" onclick="focusSearch();">
+        ${icon('search')}
+      </button>
+
+      <!-- Mobile Hamburger Toggle -->
+      <button class="nav-mobile-toggle" onclick="toggleMobileMenu()" aria-label="Toggle Navigation Menu">
+        ${icon('menu')}
+      </button>
+    </div>
+
+    <!-- Mobile Drawer for Responsive Screens -->
+    <div class="mobile-drawer" id="mobileDrawer">
+      <button class="mobile-nav-btn ${isHomeActive ? 'active' : ''}" onclick="goToHome(); closeMobileMenu();">
+        <span>Home (Front Page)</span>
+        ${icon('chev')}
+      </button>
+      <div class="mobile-nav-btn" style="color:var(--brass-light); border:none; padding-bottom:4px;">
+        <span>Project Categories</span>
+      </div>
+      <div class="mobile-sub-group">
+        <button class="mobile-sub-btn ${view.tab === 'Onboarded' ? 'active' : ''}" onclick="selectCategoryFromNav('Onboarded')">
+          <span class="dropdown-dot" style="background:var(--cat-onboarded)"></span>
+          <span>Onboarded Projects (${counts['Onboarded'] || 0})</span>
+        </button>
+        <button class="mobile-sub-btn ${view.tab === 'Working On' ? 'active' : ''}" onclick="selectCategoryFromNav('Working On')">
+          <span class="dropdown-dot" style="background:var(--cat-working)"></span>
+          <span>Working on Projects (${counts['Working On'] || 0})</span>
+        </button>
+        <button class="mobile-sub-btn ${view.tab === 'Pipeline' ? 'active' : ''}" onclick="selectCategoryFromNav('Pipeline')">
+          <span class="dropdown-dot" style="background:var(--cat-pipeline)"></span>
+          <span>Pipelines Projects (${counts['Pipeline'] || 0})</span>
+        </button>
+        <button class="mobile-sub-btn ${view.tab === 'Previously Worked' ? 'active' : ''}" onclick="selectCategoryFromNav('Previously Worked')">
+          <span class="dropdown-dot" style="background:var(--cat-previously)"></span>
+          <span>Previously Worked On (${counts['Previously Worked'] || 0})</span>
+        </button>
+        <button class="mobile-sub-btn ${view.tab === 'All' ? 'active' : ''}" onclick="selectCategoryFromNav('All')">
+          <span class="dropdown-dot" style="background:var(--brass-light)"></span>
+          <span>All Projects (${counts['All'] || 0})</span>
+        </button>
+      </div>
+    </div>
+  </header>`;
+}
+
+/* ------------------------------------------------------------
+   NAVIGATION ACTIONS
+   ------------------------------------------------------------ */
+function goToHome(){
+  closeProjectDropdown();
+  closeMobileMenu();
+  view.tab = 'All';
+  if(currentView !== 'main'){
+    currentView = 'main';
+    render();
+  } else {
+    const tabs = document.getElementById('tabs');
+    if(tabs) tabs.outerHTML = renderTabs();
+    const grid = document.getElementById('project-grid');
+    if(grid) grid.innerHTML = renderGrid();
+  }
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  updateNavActiveClasses('Home');
+}
+
+function toggleProjectDropdown(e){
+  if(e) e.stopPropagation();
+  const dropdown = document.getElementById('projectDropdownMenu');
+  const parent = document.getElementById('projectNavDropdown');
+  if(dropdown && parent){
+    const isOpen = dropdown.classList.contains('show');
+    if(isOpen){
+      closeProjectDropdown();
+    } else {
+      dropdown.classList.add('show');
+      parent.classList.add('open');
+    }
+  }
+}
+
+function closeProjectDropdown(){
+  const dropdown = document.getElementById('projectDropdownMenu');
+  const parent = document.getElementById('projectNavDropdown');
+  if(dropdown) dropdown.classList.remove('show');
+  if(parent) parent.classList.remove('open');
+}
+
+function toggleMobileMenu(){
+  mobileMenuOpen = !mobileMenuOpen;
+  const drawer = document.getElementById('mobileDrawer');
+  if(drawer) drawer.classList.toggle('open', mobileMenuOpen);
+}
+
+function closeMobileMenu(){
+  mobileMenuOpen = false;
+  const drawer = document.getElementById('mobileDrawer');
+  if(drawer) drawer.classList.remove('open');
+}
+
+function selectCategoryFromNav(cat){
+  closeProjectDropdown();
+  closeMobileMenu();
+  if(currentView !== 'main'){
+    currentView = 'main';
+    render();
+  }
+  setTab(cat);
+  const sec = document.getElementById('projects');
+  if(sec){
+    sec.scrollIntoView({ behavior: 'smooth' });
+  }
+  updateNavActiveClasses('Project');
+}
+
+function updateNavActiveClasses(activeItem){
+  const homeBtn = document.getElementById('navLinkHome');
+  const projBtn = document.getElementById('projectDropdownBtn');
+  if(homeBtn && projBtn){
+    if(activeItem === 'Home'){
+      homeBtn.classList.add('active');
+      projBtn.classList.remove('active');
+    } else {
+      homeBtn.classList.remove('active');
+      projBtn.classList.add('active');
+    }
+  }
+}
+
+// Close dropdown on outside click
+document.addEventListener('click', (e) => {
+  const dropdown = document.getElementById('projectDropdownMenu');
+  const dropdownBtn = document.getElementById('projectDropdownBtn');
+  if(dropdown && dropdown.classList.contains('show')){
+    if(!dropdown.contains(e.target) && !dropdownBtn.contains(e.target)){
+      closeProjectDropdown();
+    }
+  }
+});
+
+/* ------------------------------------------------------------
+   HERO SECTION
+   ------------------------------------------------------------ */
+function renderHero(){
+  const featured = projects.slice(0, Math.min(5, projects.length));
+  if(!featured.length) return '';
+  const currentP = featured[heroIndex] || featured[0];
+  const catColor = CATEGORY_COLOR[currentP.category] || '#8B8578';
+
+  return `<div class="hero" id="hero">
+    ${featured.map((p, i) => `
+      <div class="hero-slide ${i === heroIndex ? 'active' : ''}" data-i="${i}">
+        <div class="hero-slide-bg">${mediaFor(p)}</div>
+        <div class="hero-slide-overlay"></div>
+      </div>
+    `).join('')}
+
+    <div class="hero-content">
+      <div class="hero-eyebrow">B2B Technical Projects · LafargeHolcim Bangladesh Plc.</div>
+      <h1 class="hero-title">From foundation<br/>to <em>skyline</em>.</h1>
+      <p class="hero-sub">Tracking every site where our team is building a partnership — from the first visit to full cement onboarding, across Bangladesh's most ambitious builds.</p>
+      
+      <div class="hero-meta">
+        ${icon('pin')} <span id="heroLoc">${escapeHtml(currentP.location || '')}</span> · <span id="heroName">${escapeHtml(currentP.name || '')}</span>
+      </div>
+
+      <div class="hero-actions">
+        <button class="btn-primary" onclick="selectCategoryFromNav('All')">View all projects</button>
+        <button class="btn-outline" onclick="openProjectDashboard(${heroIndex})">See this project</button>
+      </div>
+    </div>
+
+    <!-- Floating Spec Card -->
+    <div class="hero-floating-card" id="heroFloat">
+      <div class="tag" style="background:${catColor}" id="floatTag">${escapeHtml(currentP.category)}</div>
+      <h4 class="name" id="floatName">${escapeHtml(currentP.name)}</h4>
+      <div class="status" id="floatStatus">${escapeHtml(currentP.status || 'Active engagement with project team.')}</div>
+      <button class="btn-peek" onclick="openProjectDashboard(${heroIndex})">
+        <span>View Project Dossier</span>
+        ${icon('chev')}
+      </button>
+    </div>
+
+    <button class="hero-nav-arrow prev" onclick="heroMove(-1)" aria-label="Previous slide">${icon('arrowL')}</button>
+    <button class="hero-nav-arrow next" onclick="heroMove(1)" aria-label="Next slide">${icon('arrowR')}</button>
+    
+    <div class="hero-dots">
+      ${featured.map((_, i) => `<div class="hero-dot ${i === heroIndex ? 'active' : ''}" data-i="${i}" onclick="heroGo(${i})"></div>`).join('')}
+    </div>
+
+    <div class="hero-scroll-cue" onclick="selectCategoryFromNav('All')">
+      <div class="scroll-line"></div>
+      <span>Explore projects</span>
+    </div>
+  </div>`;
+}
+
+/* ------------------------------------------------------------
+   POTENTIAL PROJECTS SLIDING CAROUSEL
+   ------------------------------------------------------------ */
+function renderPotentialSpotlight(){
+  const potentials = projects.slice(0, 6);
+  if(!potentials.length) return '';
+
+  return `<section class="spotlight-section" id="potentialShowcase">
+    <div class="spotlight-head">
+      <div class="spotlight-title-group">
+        <h2>Potential Projects</h2>
+        <p>Key potential and upcoming developments currently in progress.</p>
+      </div>
+      <div class="carousel-nav-btns">
+        <button class="c-nav-btn" onclick="slideCarousel(-360)" aria-label="Slide Left">${icon('arrowL')}</button>
+        <button class="c-nav-btn" onclick="slideCarousel(360)" aria-label="Slide Right">${icon('arrowR')}</button>
+      </div>
+    </div>
+
+    <div class="carousel-container" id="carouselContainer">
+      <div class="carousel-track">
+        ${potentials.map((p, i) => {
+          const color = CATEGORY_COLOR[p.category] || '#8B8578';
+          const pIndex = projects.indexOf(p);
+          return `
+            <div class="spotlight-card" onclick="openProjectDashboard(${pIndex})">
+              <div class="spotlight-card-img">
+                <span class="spotlight-tag" style="background:${color}">${escapeHtml(p.category)}</span>
+                ${mediaFor(p)}
+              </div>
+              <div class="spotlight-card-body">
+                <h3 class="spotlight-name">${escapeHtml(p.name)}</h3>
+                <div class="spotlight-loc">${icon('pin')} ${escapeHtml(p.location || '—')}</div>
+                <div class="spotlight-status">${escapeHtml(p.status || 'No status update yet.')}</div>
+                <div class="spotlight-card-actions">
+                  <button style="background:none; border:none; color:var(--text-muted); cursor:pointer; font-size:12px;" onclick="event.stopPropagation(); openModal(${pIndex});">
+                    Quick Pop-up
+                  </button>
+                  <span class="spotlight-btn-view">Project Dossier ${icon('chev')}</span>
+                </div>
+              </div>
+            </div>`;
+        }).join('')}
+      </div>
+    </div>
+  </section>`;
+}
+
+function slideCarousel(offset){
+  const el = document.getElementById('carouselContainer');
+  if(el) el.scrollBy({ left: offset, behavior: 'smooth' });
+}
+
+/* ------------------------------------------------------------
+   MISSION QUOTE
+   ------------------------------------------------------------ */
+function renderMission(){
+  return `<section class="mission">
+    <p>"Great buildings start with the right foundation — our job is making sure it's ours."</p>
+    <div class="attribution">B2B Technical Service Team · LafargeHolcim Bangladesh Plc.</div>
+  </section>`;
+}
+
+/* ------------------------------------------------------------
+   PROJECT PORTFOLIO SECTION
+   ------------------------------------------------------------ */
+function renderSection(){
+  return `<section class="section-wrap" id="projects">
+    <div class="section-head">
+      <div>
+        <h2 class="section-title">Our Project Portfolio</h2>
+        <div class="section-desc">Every site we visit, tracked from first contact to full onboarding with live Google Sheet synchronization.</div>
+      </div>
+    </div>
+    <div class="controls-row">
+      ${renderTabs()}
+      <div class="search-wrap">
+        <span class="search-icon">${icon('search')}</span>
+        <input id="search-input" class="search-input" placeholder="Search projects…" value="${escapeHtml(view.search)}" oninput="onSearchInput(this.value)"/>
+      </div>
+    </div>
+    <div id="project-grid">${renderGrid()}</div>
+  </section>`;
+}
+
+function renderTabs(){
+  const counts = getCategoryCounts();
+  const items = [
+    ['All', 'All Projects'],
+    ['Onboarded', 'Onboarded Projects'],
+    ['Working On', 'Working on Projects'],
+    ['Pipeline', 'Pipelines Projects'],
+    ['Previously Worked', 'Previously Worked On']
+  ];
+  return `<div class="tabs" id="tabs">${items.map(([key, label]) => `
+    <button class="tab ${view.tab === key ? 'active' : ''}" onclick="setTab('${key}')">
+      ${label}<span class="count">${counts[key] || 0}</span>
+    </button>
+  `).join('')}</div>`;
+}
+
+function renderGrid(){
+  const q = (view.search || '').toLowerCase().trim();
+  let list = projects;
+  if(view.tab !== 'All') list = list.filter(p => p.category === view.tab);
+  if(q){
+    list = list.filter(p =>
+      (p.name || '').toLowerCase().includes(q) ||
+      (p.location || '').toLowerCase().includes(q) ||
+      (p.client || '').toLowerCase().includes(q) ||
+      (p.consultant || '').toLowerCase().includes(q) ||
+      (p.contractor || '').toLowerCase().includes(q) ||
+      (p.status || '').toLowerCase().includes(q) ||
+      (p.updates || '').toLowerCase().includes(q)
+    );
+  }
+  if(!list.length){
+    return `<div class="grid"><div class="empty-state"><h3>No projects found</h3><p>Try a different search term or select another category from the Project menu.</p></div></div>`;
+  }
+  return `<div class="grid">${list.map(p => renderCard(p, projects.indexOf(p))).join('')}</div>`;
+}
+
+function renderCard(p, idx){
+  const color = CATEGORY_COLOR[p.category] || '#8B8578';
+  return `<div class="p-card" onclick="openProjectDashboard(${idx})">
+    <div class="p-card-img">
+      <div class="p-card-tag" style="background:${color}">${escapeHtml(p.category)}</div>
+      ${mediaFor(p)}
+    </div>
+    <div class="p-card-body">
+      <h3 class="p-card-name">${escapeHtml(p.name)}</h3>
+      <div class="p-card-loc">${icon('pin')} ${escapeHtml(p.location || 'Location not set')}</div>
+      <div class="p-card-status">${escapeHtml(p.status || 'No status update yet.')}</div>
+      <div class="p-card-footer">
+        <button style="background:none; border:none; color:var(--text-muted); cursor:pointer; font-size:12px;" onclick="event.stopPropagation(); openModal(${idx});">
+          Quick View
+        </button>
+        <span class="p-card-more">Full Project Dossier ${icon('chev')}</span>
+      </div>
+    </div>
+  </div>`;
+}
+
+/* ------------------------------------------------------------
+   PROJECT DOSSIER VIEW (REQUIREMENT 1 & 2: NO CONTACT FOOTER,
+   NO HIGHLIGHTED STATUS BOX, 100% UNABRIDGED FULL GOOGLE SHEET DATA)
+   ------------------------------------------------------------ */
+function renderDashboardPage(){
+  const p = projects[selectedProjectIndex] || projects[0];
+  if(!p) return '';
+  const color = CATEGORY_COLOR[p.category] || '#8B8578';
+
+  // Discover cross-project connections for this site
+  const connections = [];
+  if (p.client && p.client !== 'N/A') {
+    if (p.client.includes('Next Space')) {
+      const match = findRelatedProjects('Client', 'Next Space');
+      connections.push({ type: 'Client Group', name: 'Next Space Ltd.', count: match.length, query: 'Next Space', note: 'Multiple commercial towers with 7,500 psi Powercrete concrete trials' });
+    } else if (p.client.includes('BEZA')) {
+      const match = findRelatedProjects('Client', 'BEZA');
+      connections.push({ type: 'Client Group', name: 'BEZA / LGED', count: match.length, query: 'BEZA', note: 'Major infrastructure development requiring Coastal Guard cement' });
+    }
+  }
+  if (p.consultant && p.consultant !== 'N/A') {
+    if (p.consultant.includes('SB Consultant')) {
+      const match = findRelatedProjects('Consultant', 'SB Consultant');
+      connections.push({ type: 'Structural Consultant Network', name: 'SB Consultant', count: match.length, query: 'SB Consultant', note: 'Shared structural consultant across 3 high-rise buildings' });
+    }
+    if (p.consultant.includes('Dcon Design')) {
+      const match = findRelatedProjects('Consultant', 'Dcon Design');
+      connections.push({ type: 'Architectural Consultant Network', name: 'Dcon Design Studio', count: match.length, query: 'Dcon Design', note: 'Architectural partner across 2 iconic developments' });
+    }
+  }
+  if (p.location && p.location.includes('Tejgaon')) {
+    const match = findRelatedProjects('Location', 'Tejgaon');
+    connections.push({ type: 'Industrial Area Cluster', name: 'Tejgaon Industrial Area', count: match.length, query: 'Tejgaon', note: 'Major active commercial high-rise construction hub' });
+  }
+
+  return `<div class="dashboard-view active" id="dashboardView">
+    <div class="dash-nav-bar">
+      <button class="btn-dash-back" onclick="goToHome()">
+        ${icon('back')}
+        <span>Return to Home & Projects</span>
+      </button>
+      <div style="display:flex; gap:10px;">
+        <button class="btn-dash-back" onclick="window.print()">Print Dossier</button>
+      </div>
+    </div>
+
+    <!-- Main Header Card (Clean layout, NO highlighted Current Status box) -->
+    <div class="dash-card-main">
+      <div class="dash-img">
+        ${mediaFor(p)}
+      </div>
+      <div class="dash-header-info">
+        <span class="dash-tag" style="background:${color}">${escapeHtml(p.category)}</span>
+        <h1 class="dash-title">${escapeHtml(p.name)}</h1>
+        <div class="dash-loc">${icon('pin')} ${escapeHtml(p.location || '—')}</div>
+        <div class="dash-quick-meta">
+          <div class="dash-meta-pill"><strong>Client:</strong> ${escapeHtml(p.client || 'N/A')}</div>
+          <div class="dash-meta-pill"><strong>Duration / Value:</strong> ${escapeHtml(p.value || 'N/A')}</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Complete Information Table (100% Unabridged Google Sheet Data) -->
+    <div class="dash-table-card">
+      <h3>
+        <span>Project Information & Technical Status</span>
+        <span style="font-size:12px; font-weight:400; color:var(--text-muted);">Synced from Google Sheet</span>
+      </h3>
+      <div class="dash-grid-details">
+        <div class="dash-row-item">
+          <div class="l">Client / Implementing Body</div>
+          <div class="v">${renderLinkedStakeholder(p.client, 'Client')}</div>
+        </div>
+        <div class="dash-row-item">
+          <div class="l">Project Value / Duration</div>
+          <div class="v">${escapeHtml(p.value || '—')}</div>
+        </div>
+        <div class="dash-row-item">
+          <div class="l">Consultant</div>
+          <div class="v">${renderLinkedStakeholder(p.consultant, 'Consultant')}</div>
+        </div>
+        <div class="dash-row-item">
+          <div class="l">Contractor</div>
+          <div class="v">${renderLinkedStakeholder(p.contractor, 'Contractor')}</div>
+        </div>
+        <div class="dash-row-item full">
+          <div class="l">Project Details / Scope</div>
+          <div class="v">${formatProjectText(p.scope)}</div>
+        </div>
+        <div class="dash-row-item full">
+          <div class="l">Current Status</div>
+          <div class="v" style="color:#fff; background:rgba(255,255,255,0.03); padding:16px 20px; border-left:3px solid var(--line-gold); border-radius:4px;">
+            ${formatProjectText(p.status)}
+          </div>
+        </div>
+        <div class="dash-row-item full">
+          <div class="l">LHB Activity Updates</div>
+          <div class="v" style="color:var(--stone-2); background:rgba(176,141,87,0.1); padding:18px 20px; border-left:3px solid var(--brass); border-radius:4px;">
+            ${formatProjectText(p.updates)}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stakeholder Network & Shared Data Trend Links -->
+    ${connections.length > 0 ? `
+      <div class="dash-connections-card">
+        <div class="connections-head">
+          <div class="connections-title">
+            <span>${icon('link')}</span>
+            <span>Stakeholder Network & Data Trend Connections</span>
+          </div>
+          <div class="connections-sub">This project shares key partners and characteristics with other sites in our portfolio. Click to view data trend comparisons:</div>
+        </div>
+        <div class="connections-grid">
+          ${connections.map(c => `
+            <div class="connection-item-card" onclick="openAnalysisGroup('${escapeHtml(c.type.split(' ')[0])}', '${escapeHtml(c.query)}')">
+              <div class="conn-type">${escapeHtml(c.type)}</div>
+              <div class="conn-name">${escapeHtml(c.name)} <span class="shared-chip">${c.count} Linked Sites</span></div>
+              <div class="conn-summary">${escapeHtml(c.note)}</div>
+              <div class="conn-action">Explore Cross-Project Data Trend ${icon('chev')}</div>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    ` : ''}
+  </div>`;
+}
+
+/* ------------------------------------------------------------
+   DATA ANALYSIS & TREND VIEW (REQUIREMENT 3: CROSS-PROJECT TRENDS)
+   ------------------------------------------------------------ */
+function renderAnalysisPage(){
+  const { type, query } = analysisState;
+  const matches = findRelatedProjects(type, query);
+  
+  // Calculate analytics insights across matching projects
+  const workingCount = matches.filter(m => m.category === 'Working On').length;
+  const pipelineCount = matches.filter(m => m.category === 'Pipeline').length;
+  const onboardedCount = matches.filter(m => m.category === 'Onboarded').length;
+
+  return `<div class="analysis-view active" id="analysisView">
+    <div class="dash-nav-bar">
+      <button class="btn-dash-back" onclick="returnFromAnalysis()">
+        ${icon('back')}
+        <span>Return to Project Dossier</span>
+      </button>
+      <div style="display:flex; gap:10px;">
+        <button class="btn-dash-back" onclick="goToHome()">Return to Home</button>
+        <button class="btn-dash-back" onclick="window.print()">Print Trend Analysis</button>
+      </div>
+    </div>
+
+    <!-- Header Banner -->
+    <div class="analysis-hero-header">
+      <div class="analysis-tag">Cross-Project Data Trend & Stakeholder Analysis</div>
+      <h1 class="analysis-title">${escapeHtml(query)}</h1>
+      <p class="analysis-sub">Comparative technical trend analysis across <strong>${matches.length} development projects</strong> sharing the same ${type.toLowerCase()} relationships in Bangladesh.</p>
+    </div>
+
+    <!-- Analytics KPI Cards -->
+    <div class="analysis-kpi-grid">
+      <div class="analysis-kpi-card">
+        <div class="analysis-kpi-label">Connected Sites</div>
+        <div class="analysis-kpi-val">${matches.length}</div>
+        <div class="analysis-kpi-sub">Total active project sites</div>
+      </div>
+      <div class="analysis-kpi-card">
+        <div class="analysis-kpi-label">Project Stages</div>
+        <div class="analysis-kpi-val" style="font-size:18px; margin-top:4px;">
+          ${workingCount > 0 ? `${workingCount} Ongoing · ` : ''}${pipelineCount > 0 ? `${pipelineCount} Pipeline` : ''}
+        </div>
+        <div class="analysis-kpi-sub">Commercial & technical progress</div>
+      </div>
+      <div class="analysis-kpi-card">
+        <div class="analysis-kpi-label">Target Concrete Specs</div>
+        <div class="analysis-kpi-val" style="font-size:18px; color:var(--brass-light); margin-top:4px;">7,500 psi</div>
+        <div class="analysis-kpi-sub">Holcim Powercrete / Coastal Guard</div>
+      </div>
+      <div class="analysis-kpi-card">
+        <div class="analysis-kpi-label">Cluster Area</div>
+        <div class="analysis-kpi-val" style="font-size:18px; margin-top:4px;">${escapeHtml(matches[0]?.location ? matches[0].location.split(',')[0] : 'Dhaka Hub')}</div>
+        <div class="analysis-kpi-sub">Primary geographic corridor</div>
+      </div>
+    </div>
+
+    <!-- Comparative Side-by-Side Projects -->
+    <h2 style="font-size:22px; font-weight:600; color:#fff; margin-bottom:20px;">
+      Comparative Projects Portfolio (${matches.length})
+    </h2>
+
+    <div class="analysis-projects-grid">
+      ${matches.map(p => {
+        const pIdx = projects.indexOf(p);
+        const color = CATEGORY_COLOR[p.category] || '#8B8578';
+        return `
+          <div class="analysis-p-card">
+            <div class="analysis-p-card-img">
+              <span class="spotlight-tag" style="background:${color}; position:absolute; top:12px; left:12px;">${escapeHtml(p.category)}</span>
+              ${mediaFor(p)}
+            </div>
+            <div class="analysis-p-card-body">
+              <h3>${escapeHtml(p.name)}</h3>
+              <div style="font-size:13px; color:var(--text-muted); display:flex; align-items:center; gap:6px;">
+                ${icon('pin')} ${escapeHtml(p.location || '—')}
+              </div>
+              <div style="font-size:13px; color:#fff;">
+                <strong>Scope:</strong> ${escapeHtml(p.scope || '—')}
+              </div>
+              
+              <div class="analysis-data-block">
+                <div class="block-label">Current Status</div>
+                ${formatProjectText(p.status)}
+              </div>
+              
+              <div class="analysis-data-block" style="border-left-color:var(--line-gold); background:rgba(176,141,87,0.08);">
+                <div class="block-label">LHB Activity Updates</div>
+                ${formatProjectText(p.updates)}
+              </div>
+
+              <div style="margin-top:auto; padding-top:14px; border-top:1px solid var(--line);">
+                <button class="btn-primary" style="width:100%; font-size:13px; padding:10px 16px;" onclick="openProjectDashboard(${pIdx})">
+                  View Complete Dossier
+                </button>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('')}
+    </div>
+  </div>`;
+}
+
+function openProjectDashboard(idx){
+  selectedProjectIndex = idx;
+  currentView = 'dashboard';
+  render();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function goToMainView(){
+  currentView = 'main';
+  render();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+/* ------------------------------------------------------------
+   QUICK POP-UP MODAL
+   ------------------------------------------------------------ */
+function renderModalShell(){
+  return `<div class="modal-overlay" id="modalOverlay" onclick="if(event.target===this)closeModal()">
+    <div class="modal" id="modalContent"></div>
+  </div>`;
+}
+
+function openModal(idx){
+  const p = projects[idx];
+  if(!p) return;
+  const color = CATEGORY_COLOR[p.category] || '#8B8578';
+
+  document.getElementById('modalContent').innerHTML = `
+    <div class="modal-img">${mediaFor(p)}</div>
+    <div class="modal-body">
+      <button class="modal-close" onclick="closeModal()" aria-label="Close">${icon('close')}</button>
+      <span class="modal-tag" style="background:${color}">${escapeHtml(p.category)}</span>
+      <h3 class="modal-name">${escapeHtml(p.name)}</h3>
+      <div class="modal-loc">${icon('pin')} ${escapeHtml(p.location || '—')}</div>
+      <div class="modal-row"><div class="l">Client</div><div class="v">${escapeHtml(p.client || '—')}</div></div>
+      <div class="modal-row"><div class="l">Consultant</div><div class="v">${escapeHtml(p.consultant || '—')}</div></div>
+      <div class="modal-row"><div class="l">Contractor</div><div class="v">${escapeHtml(p.contractor || '—')}</div></div>
+      <div class="modal-row"><div class="l">Value / Duration</div><div class="v">${escapeHtml(p.value || '—')}</div></div>
+      <div class="modal-block"><div class="l">Scope</div><p>${formatProjectText(p.scope || '—')}</p></div>
+      <div class="modal-block"><div class="l">Current status</div><p>${formatProjectText(p.status || '—')}</p></div>
+      <div class="modal-block"><div class="l">LHB Activity updates</div><p>${formatProjectText(p.updates || '—')}</p></div>
+      
+      <div style="margin-top:24px; padding-top:16px; border-top:1px solid var(--line);">
+        <button class="btn-primary" style="width:100%;" onclick="closeModal(); openProjectDashboard(${idx});">
+          Open Full Dossier
+        </button>
+      </div>
+    </div>`;
+
+  document.getElementById('modalOverlay').classList.add('visible');
+}
+
+function closeModal(){
+  const overlay = document.getElementById('modalOverlay');
+  if(overlay) overlay.classList.remove('visible');
+}
+
+document.addEventListener('keydown', e => {
+  if(e.key === 'Escape') {
+    closeModal();
+    closeProjectDropdown();
+    closeMobileMenu();
+  }
+});
+
+/* ------------------------------------------------------------
+   CONTACT SECTION (SHOWN ONLY AT BOTTOM OF HOME PAGE)
+   ------------------------------------------------------------ */
+function renderContact(){
+  return `<footer class="contact" id="contact">
+    <div class="contact-inner">
+      <h2 class="contact-head">For any inquiries</h2>
+      <p class="contact-sub">Reach out to our B2B Technical Service team for project onboarding, technical support, or partnership questions.</p>
+      
+      <div class="contact-card">
+        <div class="contact-avatar">RA</div>
+        <div class="contact-details">
+          <h4>Contact: Rafi Azam</h4>
+          <div class="role">Assistant Engineer</div>
+          <div class="dept">LIP and B2B Technical Service · LafargeHolcim Bangladesh Plc.</div>
+          
+          <div class="contact-channels">
+            <a class="contact-phone-btn" href="tel:01335182784">
+              ${icon('phone')} Contact: 01335182784
+            </a>
+            <a class="contact-phone-btn" href="https://wa.me/8801335182784" target="_blank" rel="noopener">
+              WhatsApp: 01335182784
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span>© LafargeHolcim Bangladesh Plc. — B2B Technical Projects</span>
+        <span>Data updates automatically from the shared project sheet</span>
+      </div>
+    </div>
+  </footer>`;
+}
+
+/* ------------------------------------------------------------
+   FILTER & SEARCH CONTROLS
+   ------------------------------------------------------------ */
+function setTab(cat){
+  view.tab = cat;
+  const tabs = document.getElementById('tabs');
+  if(tabs) tabs.outerHTML = renderTabs();
+  const grid = document.getElementById('project-grid');
+  if(grid) grid.innerHTML = renderGrid();
+}
+
+function onSearchInput(v){
+  view.search = v;
+  const grid = document.getElementById('project-grid');
+  if(grid) grid.innerHTML = renderGrid();
+}
+
+function focusSearch(){
+  if(currentView !== 'main'){
+    currentView = 'main';
+    render();
+  }
+  const sec = document.getElementById('projects');
+  if(sec) sec.scrollIntoView({ behavior: 'smooth' });
+  setTimeout(() => {
+    const input = document.getElementById('search-input');
+    if(input) input.focus();
+  }, 400);
+}
+
+/* ------------------------------------------------------------
+   HERO SLIDER CONTROLS
+   ------------------------------------------------------------ */
+function heroGo(i){
+  const slides = document.querySelectorAll('.hero-slide');
+  const dots = document.querySelectorAll('.hero-dot');
+  if(!slides.length) return;
+
+  heroIndex = (i + slides.length) % slides.length;
+  slides.forEach((s, idx) => s.classList.toggle('active', idx === heroIndex));
+  dots.forEach((d, idx) => d.classList.toggle('active', idx === heroIndex));
+
+  const p = projects[heroIndex];
+  if(p){
+    const locEl = document.getElementById('heroLoc');
+    if(locEl) locEl.textContent = p.location || '';
+    const nameEl = document.getElementById('heroName');
+    if(nameEl) nameEl.textContent = p.name || '';
+
+    // Update floating card
+    const floatTag = document.getElementById('floatTag');
+    if(floatTag) {
+      floatTag.textContent = p.category;
+      floatTag.style.background = CATEGORY_COLOR[p.category] || '#8B8578';
+    }
+    const floatName = document.getElementById('floatName');
+    if(floatName) floatName.textContent = p.name;
+    const floatStatus = document.getElementById('floatStatus');
+    if(floatStatus) floatStatus.textContent = p.status || 'Active engagement with project team.';
+  }
+  resetHeroTimer();
+}
+
+function heroMove(dir){
+  heroGo(heroIndex + dir);
+}
+
+function resetHeroTimer(){
+  clearInterval(heroTimer);
+  heroTimer = setInterval(() => heroMove(1), 6000);
+}
+
+function attachAfterRender(){
+  window.onscroll = () => {
+    const nav = document.getElementById('nav');
+    if(nav) nav.classList.toggle('scrolled', window.scrollY > 50);
+
+    // Dynamic active state toggle for Home vs Project in main view
+    if(currentView === 'main'){
+      const projSec = document.getElementById('projects');
+      if(projSec){
+        const rect = projSec.getBoundingClientRect();
+        if(rect.top <= 180 && rect.bottom >= 150){
+          updateNavActiveClasses('Project');
+        } else if(rect.top > 180 && view.tab === 'All'){
+          updateNavActiveClasses('Home');
+        }
+      }
+    }
+  };
+  resetHeroTimer();
+}
+
+/* ------------------------------------------------------------
+   INITIAL LOAD & PERIODIC AUTO-SYNC
+   ------------------------------------------------------------ */
+render();
+loadData();
+setInterval(loadData, 60000);
+</script>
+</body>
+</html>
