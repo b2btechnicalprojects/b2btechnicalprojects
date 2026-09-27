@@ -1664,27 +1664,27 @@ const DEMO_DATA = [
     name: 'LGED Bridge Project at NSEZ',
     location: 'Upazila: Sonagazi',
     client: 'BEZA / LGED',
-    consultant: 'DPM-RPMC-EKA JV',
-    contractor: 'RBCG-NDE JV',
+    consultant: 'DPM; RPMC; EKA',
+    contractor: 'RBCG; NDE',
     scope: 'Construction of 640m 4-Lane Aesthetic Progressive Cantilever Box Girder Bridge, 1230m 4lane aesthetic Arch Bridge, 3.40km 4lane Connecting Pavement Road, 4.29km River Training Work, 3.365km Slope Protection (Package No- BEZA/W-01)',
     value: 'BDT 662.88 Cr / 2026-2029',
     status: 'Site mobilization completed; NDE established their own concrete batching plant at site',
     updates: 'Coastal Guard samples sent for third party testing and analysis. After source approval, commercial negotiation will be started. Cement test request for Holcim Coastal Guard.',
-    category: 'Pipeline',
-    photo: 'https://images.unsplash.com/photo-1545558014-8692077e9b5c?auto=format&fit=crop&w=1200&q=80'
+    category: 'Onboarded',
+    photo: 'https://i.ibb.co.com/wNqh5V43/LGED-Bridge-Project-at-NSEZ.png'
   },
   {
     name: 'Jolshiri Central Complex',
     location: 'Central Business District (Sec-15), Jolshiri Abason',
     client: 'Jolshiri Abason',
     consultant: 'HuaDu Architecture and Urban Design Company Ltd. (HDD), China; Local: CATS, MIST, CRITS',
-    contractor: 'SDRB-SHJR JV',
+    contractor: 'SDRB; SHJR',
     scope: 'B1+5 Storey, Total Floor Area: 320,000 SFT',
     value: 'N/A',
     status: 'Basement work is ongoing. Using CEM I bulk cement from local brand Shah using own batching plant',
     updates: 'Combined trial has been done. Got satisfactory test results of 7 days and 28 days. 28 days test result achieved 125.4% of required strength. Commercial negotiation ongoing.',
     category: 'Working On',
-    photo: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80'
+    photo: 'https://i.ibb.co.com/ghw3hGX/Jolshiri-Central-Complex.png'
   },
   {
     name: 'Islamic Arabic University Campus',
@@ -1696,8 +1696,8 @@ const DEMO_DATA = [
     value: 'Estimated Cost: BDT 179.84 Crore',
     status: 'Site development completed; Piling works partially completed; Superstructure construction progressing',
     updates: 'Ongoing activity updates.',
-    category: 'Pipeline',
-    photo: 'https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&w=1200&q=80'
+    category: 'Working On',
+    photo: 'https://i.ibb.co.com/Vb3kwjn/Islamic-Arabic-University-Campus.png'
   },
   {
     name: 'TA Tower',
@@ -1736,7 +1736,7 @@ const DEMO_DATA = [
     status: 'Basement work is ongoing. Using RMC from Dhamrai Plant; Using OPC from Fresh',
     updates: 'PM visit & Consultant visit done. Internal negotiation with RMC & Supply Planning ongoing. Meetings done with Nextspace\'s MD & QC team. Conducted 2 Trial Mixes using Powercrete Cement to achieve 7,500 psi in 28 days (7- & 14-days test results satisfactory).',
     category: 'Working On',
-    photo: 'https://drive.google.com/uc?export=view&id=1QS8Dprpc62kgcGjxqTjRrEkJQ0so8mqu'
+    photo: 'https://i.ibb.co.com/kV8vjtJd/Emnipur-Tower.png'
   },
   {
     name: 'Sky Reach Tower',
@@ -1749,7 +1749,7 @@ const DEMO_DATA = [
     status: 'Piling work started. Using Shah RMC',
     updates: 'PM visit & Consultant visit done. Shore Piling & Design review ongoing. Technical Presentation at SKCD done. RAJUK Plan under review (Revised).',
     category: 'Pipeline',
-    photo: 'https://images.unsplash.com/photo-1577495508048-b635879837f1?auto=format&fit=crop&w=1200&q=80'
+    photo: 'https://i.ibb.co.com/zWYNXt5m/Sky-Reach-Tower.png'
   },
   {
     name: 'Green Mohakhali',
@@ -1762,12 +1762,12 @@ const DEMO_DATA = [
     status: 'Shore piling work done; Basement work ongoing. Using Borak RMC; Using Incee cement',
     updates: 'Visits done with Project In-Charge, DM of Supply Chain, and AGM of Construction. Approaching for technical presentation with engineering team.',
     category: 'Pipeline',
-    photo: 'https://images.unsplash.com/photo-1554469384-e58fac16e23a?auto=format&fit=crop&w=1200&q=80'
+    photo: 'https://i.ibb.co.com/fdgfsCDn/Green-Mohakhali.png'
   }
 ];
 
 let projects = [...DEMO_DATA];
-let loaded = false;
+let loaded = true;
 let heroIndex = 0;
 let heroTimer = null;
 let currentView = 'main'; // 'main', 'dashboard', or 'analysis'
@@ -1806,12 +1806,15 @@ function formatProjectText(text){
 }
 
 function resolvePhotoUrl(p) {
-  const url = (p.photo || '').trim();
-  const name = (p.name || '').toLowerCase();
+  let url = (p.photo || '').trim();
   
-  if (name.includes('ta tower')) return 'TA Tower.png';
-  if (name.includes('nh tower')) return 'NH Tower.png';
-  if (name.includes('emnipur')) return 'Emnipur Tower.png';
+  // Extract direct image url if BBCode or HTML embed was pasted
+  if (url) {
+    const bbMatch = url.match(/\[img\](.*?)\[\/img\]/i);
+    if (bbMatch && bbMatch[1]) url = bbMatch[1].trim();
+    const htmlMatch = url.match(/src=["'](.*?)["']/i);
+    if (htmlMatch && htmlMatch[1]) url = htmlMatch[1].trim();
+  }
 
   if (url) {
     const driveMatch = url.match(/\/file\/d\/([a-zA-Z0-9_-]+)/) ||
@@ -1822,6 +1825,18 @@ function resolvePhotoUrl(p) {
     }
     return url;
   }
+
+  // Smart fallback matching by project name if photo column is empty
+  const name = (p.name || '').toLowerCase();
+  if (name.includes('lged')) return 'https://i.ibb.co.com/wNqh5V43/LGED-Bridge-Project-at-NSEZ.png';
+  if (name.includes('jolshiri')) return 'https://i.ibb.co.com/ghw3hGX/Jolshiri-Central-Complex.png';
+  if (name.includes('islamic arabic')) return 'https://i.ibb.co.com/Vb3kwjn/Islamic-Arabic-University-Campus.png';
+  if (name.includes('ta tower')) return 'https://i.ibb.co/MDbWZpK3/TA-Tower.png';
+  if (name.includes('nh tower')) return 'https://i.ibb.co/CKw1z3st/NH-Tower.png';
+  if (name.includes('emnipur')) return 'https://i.ibb.co.com/kV8vjtJd/Emnipur-Tower.png';
+  if (name.includes('sky reach')) return 'https://i.ibb.co.com/zWYNXt5m/Sky-Reach-Tower.png';
+  if (name.includes('green mohakhali')) return 'https://i.ibb.co.com/fdgfsCDn/Green-Mohakhali.png';
+
   return 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80';
 }
 
@@ -1881,14 +1896,8 @@ function renderLinkedStakeholder(fieldValue, type){
   
   knownEntities.forEach(ent => {
     if(ent.type === type && formatted.toLowerCase().includes(ent.name.toLowerCase())){
-      const matches = findRelatedProjects(type, ent.query);
-      const isShared = matches.length > 1;
-      const countBadge = isShared 
-        ? `<span class="shared-chip">${icon('link')} ${matches.length} Shared Sites</span>`
-        : `<span class="shared-chip">${matches.length} Site</span>`;
-      
       const regex = new RegExp(`(${ent.name.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&')})`, 'gi');
-      formatted = formatted.replace(regex, `<span class="trend-hyperlink" onclick="openAnalysisGroup('${ent.type}', '${escapeHtml(ent.query)}')">$1 ${countBadge}</span>`);
+      formatted = formatted.replace(regex, `<span class="trend-hyperlink" onclick="openAnalysisGroup('${ent.type}', '${escapeHtml(ent.query)}')">$1</span>`);
     }
   });
 
@@ -1961,17 +1970,23 @@ function rowsToProjects(rows){
 }
 
 async function loadData(){
+  let text = '';
   try{
     const res = await fetch(SHEET_CSV_URL + '&_cb=' + Date.now(), { cache: 'no-store' });
-    if(!res.ok) throw new Error('Network error');
-    const text = await res.text();
+    if(res.ok) text = await res.text();
+  }catch(e){
+    // If direct fetch fails (e.g. running from file:/// or CORS restricted), try proxy
+    try {
+      const proxyUrl = 'https://api.allorigins.win/raw?url=' + encodeURIComponent(SHEET_CSV_URL + '&_cb=' + Date.now());
+      const pRes = await fetch(proxyUrl);
+      if(pRes.ok) text = await pRes.text();
+    } catch(err){}
+  }
+  if(text){
     const parsed = rowsToProjects(parseCSV(text));
     if(parsed.length > 0){
       projects = parsed;
     }
-  }catch(e){
-    // Keep full DEMO_DATA fallback if offline or restricted
-    projects = DEMO_DATA;
   }
   loaded = true;
   render();
@@ -2211,11 +2226,17 @@ document.addEventListener('click', (e) => {
 /* ------------------------------------------------------------
    HERO SECTION
    ------------------------------------------------------------ */
+function getHeroProjects(){
+  const ongoing = projects.filter(p => p.category === 'Working On');
+  return ongoing.length ? ongoing : projects.slice(0, 5);
+}
+
 function renderHero(){
-  const featured = projects.slice(0, Math.min(5, projects.length));
+  const featured = getHeroProjects();
   if(!featured.length) return '';
   const currentP = featured[heroIndex] || featured[0];
   const catColor = CATEGORY_COLOR[currentP.category] || '#8B8578';
+  const currentRealIdx = projects.indexOf(currentP);
 
   return `<div class="hero" id="hero">
     ${featured.map((p, i) => `
@@ -2236,7 +2257,7 @@ function renderHero(){
 
       <div class="hero-actions">
         <button class="btn-primary" onclick="selectCategoryFromNav('All')">View all projects</button>
-        <button class="btn-outline" onclick="openProjectDashboard(${heroIndex})">See this project</button>
+        <button class="btn-outline" id="heroDossierBtn" onclick="openProjectDashboard(${currentRealIdx})">See this project</button>
       </div>
     </div>
 
@@ -2245,7 +2266,7 @@ function renderHero(){
       <div class="tag" style="background:${catColor}" id="floatTag">${escapeHtml(currentP.category)}</div>
       <h4 class="name" id="floatName">${escapeHtml(currentP.name)}</h4>
       <div class="status" id="floatStatus">${escapeHtml(currentP.status || 'Active engagement with project team.')}</div>
-      <button class="btn-peek" onclick="openProjectDashboard(${heroIndex})">
+      <button class="btn-peek" id="heroFloatBtn" onclick="openProjectDashboard(${currentRealIdx})">
         <span>View Project Dossier</span>
         ${icon('chev')}
       </button>
@@ -2417,32 +2438,6 @@ function renderDashboardPage(){
   if(!p) return '';
   const color = CATEGORY_COLOR[p.category] || '#8B8578';
 
-  // Discover cross-project connections for this site
-  const connections = [];
-  if (p.client && p.client !== 'N/A') {
-    if (p.client.includes('Next Space')) {
-      const match = findRelatedProjects('Client', 'Next Space');
-      connections.push({ type: 'Client Group', name: 'Next Space Ltd.', count: match.length, query: 'Next Space', note: 'Multiple commercial towers with 7,500 psi Powercrete concrete trials' });
-    } else if (p.client.includes('BEZA')) {
-      const match = findRelatedProjects('Client', 'BEZA');
-      connections.push({ type: 'Client Group', name: 'BEZA / LGED', count: match.length, query: 'BEZA', note: 'Major infrastructure development requiring Coastal Guard cement' });
-    }
-  }
-  if (p.consultant && p.consultant !== 'N/A') {
-    if (p.consultant.includes('SB Consultant')) {
-      const match = findRelatedProjects('Consultant', 'SB Consultant');
-      connections.push({ type: 'Structural Consultant Network', name: 'SB Consultant', count: match.length, query: 'SB Consultant', note: 'Shared structural consultant across 3 high-rise buildings' });
-    }
-    if (p.consultant.includes('Dcon Design')) {
-      const match = findRelatedProjects('Consultant', 'Dcon Design');
-      connections.push({ type: 'Architectural Consultant Network', name: 'Dcon Design Studio', count: match.length, query: 'Dcon Design', note: 'Architectural partner across 2 iconic developments' });
-    }
-  }
-  if (p.location && p.location.includes('Tejgaon')) {
-    const match = findRelatedProjects('Location', 'Tejgaon');
-    connections.push({ type: 'Industrial Area Cluster', name: 'Tejgaon Industrial Area', count: match.length, query: 'Tejgaon', note: 'Major active commercial high-rise construction hub' });
-  }
-
   return `<div class="dashboard-view active" id="dashboardView">
     <div class="dash-nav-bar">
       <button class="btn-dash-back" onclick="goToHome()">
@@ -2511,29 +2506,6 @@ function renderDashboardPage(){
         </div>
       </div>
     </div>
-
-    <!-- Stakeholder Network & Shared Data Trend Links -->
-    ${connections.length > 0 ? `
-      <div class="dash-connections-card">
-        <div class="connections-head">
-          <div class="connections-title">
-            <span>${icon('link')}</span>
-            <span>Stakeholder Network & Data Trend Connections</span>
-          </div>
-          <div class="connections-sub">This project shares key partners and characteristics with other sites in our portfolio. Click to view data trend comparisons:</div>
-        </div>
-        <div class="connections-grid">
-          ${connections.map(c => `
-            <div class="connection-item-card" onclick="openAnalysisGroup('${escapeHtml(c.type.split(' ')[0])}', '${escapeHtml(c.query)}')">
-              <div class="conn-type">${escapeHtml(c.type)}</div>
-              <div class="conn-name">${escapeHtml(c.name)} <span class="shared-chip">${c.count} Linked Sites</span></div>
-              <div class="conn-summary">${escapeHtml(c.note)}</div>
-              <div class="conn-action">Explore Cross-Project Data Trend ${icon('chev')}</div>
-            </div>
-          `).join('')}
-        </div>
-      </div>
-    ` : ''}
   </div>`;
 }
 
@@ -2779,16 +2751,24 @@ function heroGo(i){
   const dots = document.querySelectorAll('.hero-dot');
   if(!slides.length) return;
 
+  const featured = getHeroProjects();
   heroIndex = (i + slides.length) % slides.length;
   slides.forEach((s, idx) => s.classList.toggle('active', idx === heroIndex));
   dots.forEach((d, idx) => d.classList.toggle('active', idx === heroIndex));
 
-  const p = projects[heroIndex];
+  const p = featured[heroIndex] || featured[0];
   if(p){
+    const realIdx = projects.indexOf(p);
     const locEl = document.getElementById('heroLoc');
     if(locEl) locEl.textContent = p.location || '';
     const nameEl = document.getElementById('heroName');
     if(nameEl) nameEl.textContent = p.name || '';
+
+    // Update buttons
+    const dossierBtn = document.getElementById('heroDossierBtn');
+    if(dossierBtn) dossierBtn.setAttribute('onclick', `openProjectDashboard(${realIdx})`);
+    const floatBtn = document.getElementById('heroFloatBtn');
+    if(floatBtn) floatBtn.setAttribute('onclick', `openProjectDashboard(${realIdx})`);
 
     // Update floating card
     const floatTag = document.getElementById('floatTag');
